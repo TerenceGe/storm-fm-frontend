@@ -1,0 +1,20 @@
+.dailyTracks {
+  margin-top: 3.75rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  .dateContainer {
+    text-align: left;
+  }
+  .date {
+    color: white;
+    background-color: #fa4c29;
+    font-family: "Oswald", Tahoma, Arial;
+    text-transform: uppercase;
+    padding: 3px 5px;
+    font-size: 0.8125rem;
+    display: inline-block;
+  }
+}

@@ -1,0 +1,96 @@
+.track {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 1px;
+
+  .leftContainer {
+    height: 4rem;
+    img {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+
+  .mainContainer {
+    height: 4rem;
+    text-align: left;
+    padding: 0.625rem;
+    width: calc(100% - 8rem);
+
+    .info {
+      font-size: 0.875rem;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 100%;
+
+      &:hover {
+        color: #fa4c29;
+      }
+    }
+
+    .description {
+      color: #9C9696;
+      font-size: 0.8125rem;
+      display: block;
+      padding: 0.4rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: calc(100% - 1rem);
+    }
+  }
+
+  .rightContainer {
+    height: 4rem;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    color: white;
+
+    .likes, .comments {
+      width: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 4rem;
+      justify-content: center;
+      fill: white;
+      transition: all 0.3s ease;
+
+      .icon, .count {
+        padding: 0.125rem 0;
+      }
+
+      .icon {
+        svg {
+          width: 0.875rem;
+          height: 0.875rem;
+        }
+      }
+
+      .count {
+        font-size: 0.75rem;
+      }
+    }
+
+    .likes {
+      &:hover {
+        background-color: #fa4c29;
+      }
+    }
+
+    .comments {
+      &:hover {
+        fill: black;
+        color: black;
+        background-color: white;
+      }
+    }
+  }
+}
