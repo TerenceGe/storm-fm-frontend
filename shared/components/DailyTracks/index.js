@@ -10,15 +10,13 @@ const DailyTracks = ({ date, tracks }) => (
         <FormattedDate
           value={new Date(date)}
           month="long"
-          weekday="long"
           day="numeric"
+          weekday="long"
         />
       </div>
     </div>
     <div>
-      {
-        tracks.map(track => <Track {...track} />)
-      }
+      {tracks.map(track => <Track {...track} />)}
     </div>
   </div>
 )

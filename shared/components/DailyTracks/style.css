@@ -5,9 +5,15 @@
   display: flex;
   flex-direction: column;
 
+  @media screen and (width <= 480px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
   .dateContainer {
     text-align: left;
   }
+
   .date {
     color: white;
     background-color: #fa4c29;

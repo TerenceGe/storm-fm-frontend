@@ -17,8 +17,8 @@ const Branding = () => (
   <a className={style.branding}>
     <SoundWave />
     <div className={style.title}>
-      <span>S</span>
-      <span>TORM</span>
+      <span>ST</span>
+      <span>ORM</span>
       <span>FM</span>
       <span>.</span>
     </div>
