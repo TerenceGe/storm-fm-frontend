@@ -1,4 +1,4 @@
-/* react@jsx */
+/* @jsx */
 /* global document */
 
 import React from 'react'

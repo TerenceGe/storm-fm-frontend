@@ -1,4 +1,4 @@
-/* react@jsx */
+/* @jsx */
 
 import React from 'react'
 import '../../resources/fonts/fonts.css'

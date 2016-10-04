@@ -1,4 +1,4 @@
-/* react@jsx */
+/* @jsx */
 /* global __webpack_hash__ */
 
 import Express from 'express'

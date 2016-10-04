@@ -1,4 +1,4 @@
-/* react@jsx */
+/* @jsx */
 
 import React from 'react'
 import DailyTracks from '../../../components/DailyTracks'
