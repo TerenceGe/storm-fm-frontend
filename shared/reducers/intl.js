@@ -1,5 +1,4 @@
 import { handleActions } from 'redux-actions'
-
 import enLocales from '../resources/intl/en'
 import zhLocales from '../resources/intl/zh'
 

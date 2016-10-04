@@ -1,3 +1,5 @@
+/* react@jsx */
+
 import React from 'react'
 import { FormattedDate } from 'react-intl'
 import style from './style.css'

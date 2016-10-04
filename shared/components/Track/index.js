@@ -1,3 +1,5 @@
+/* react@jsx */
+
 import React from 'react'
 import style from './style.css'
 import LikeIcon from '../../resources/icons/LikeIcon'

@@ -1,12 +1,12 @@
+/* react@jsx */
 /* global window */
 
+import React from 'react'
 import { Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { Provider } from 'react-redux'
-import React from 'react'
 import 'normalize.css'
 import ConnectedIntlProvider from './components/ConnectedIntlProvider'
-
 import routes from './routes'
 import configure from './store'
 

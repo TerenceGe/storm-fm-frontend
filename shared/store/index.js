@@ -1,6 +1,6 @@
 /* global window, require */
-import { createStore, applyMiddleware } from 'redux'
 
+import { createStore, applyMiddleware } from 'redux'
 import { logger } from '../middleware'
 import rootReducer from '../reducers'
 

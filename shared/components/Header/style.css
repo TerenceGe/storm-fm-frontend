@@ -41,6 +41,7 @@
 
       .soundwave {
         padding-right: 0.625rem;
+
         span {
           width: 5px;
           height: 26px;
@@ -65,6 +66,7 @@
 
       .title {
         color: #c3121c;
+
         span:nth-of-type(2n) {
           color: white;
         }

@@ -1,4 +1,4 @@
-# storm-frontend
+# stormfm-frontend
 
 ## Setup
 ```sh
