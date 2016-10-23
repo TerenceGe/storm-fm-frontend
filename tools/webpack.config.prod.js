@@ -84,7 +84,7 @@ module.exports = [
       process: false,
       Buffer: false,
       __filename: false,
-      __dirname: false,
+      __dirname: false
     },
     plugins: [
       new webpack.ExtendedAPIPlugin(),

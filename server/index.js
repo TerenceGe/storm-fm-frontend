@@ -26,6 +26,7 @@ const renderFullPage = (root, state) => `
     <meta charset="utf-8">
     <title>Storm FM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="https://s3.amazonaws.com/storm-fm/favicon.png">
     <link href="/bundle.css?v=${__webpack_hash__}" rel="stylesheet">
   </head>
   <body>
