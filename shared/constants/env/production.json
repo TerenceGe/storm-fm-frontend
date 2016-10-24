@@ -1,0 +1,4 @@
+{
+  "API_URL": "http://api.stormfm.io/api",
+  "CDN_URL": "https://s3.amazonaws.com/storm-fm"
+}

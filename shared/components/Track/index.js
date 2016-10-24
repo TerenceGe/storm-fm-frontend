@@ -5,14 +5,14 @@ import style from './style.css'
 import LikeIcon from '../../resources/icons/LikeIcon'
 import CommentIcon from '../../resources/icons/CommentIcon'
 
-const Track = ({ name, artist, description, likes, comments, coverUrl, sourceUrl }) => (
+const Track = ({ title, artist, description, like_count, comment_count, artwork, source }) => (
   <div className={style.track}>
     <div className={style.leftContainer}>
-      <img role="presentation" src={coverUrl} />
+      <img role="presentation" src={artwork.url} />
     </div>
     <div className={style.mainContainer}>
-      <a className={style.info} href={sourceUrl} rel="noopener noreferrer" target="_blank">
-        {`${artist} - ${name}`}
+      <a className={style.info} href={source.url} rel="noopener noreferrer" target="_blank">
+        {`${artist.name} - ${title}`}
       </a>
       <div className={style.description}>{description}</div>
     </div>
@@ -21,13 +21,13 @@ const Track = ({ name, artist, description, likes, comments, coverUrl, sourceUrl
         <div className={style.icon}>
           <CommentIcon />
         </div>
-        <div className={style.count}>{comments}</div>
+        <div className={style.count}>{comment_count}</div>
       </a>
       <a className={style.likes}>
         <div className={style.icon}>
           <LikeIcon />
         </div>
-        <div className={style.count}>{likes}</div>
+        <div className={style.count}>{like_count}</div>
       </a>
     </div>
   </div>

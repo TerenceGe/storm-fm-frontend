@@ -1,4 +1,4 @@
 {
-  "presets": ["react", "es2015", "stage-0", "react"],
-  "plugins": ["transform-react-constant-elements", "transform-react-inline-elements"]
+  "presets": ["react", "es2015", "stage-2"],
+  "plugins": ["transform-runtime", "transform-react-constant-elements", "transform-react-inline-elements"]
 }

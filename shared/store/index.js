@@ -1,15 +1,19 @@
 /* global window, require */
 
 import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
 import { logger } from '../middleware'
 import rootReducer from '../reducers'
+import sagas from '../sagas'
 
 export default function configure(initialState) {
   const create = (typeof window !== 'undefined' && window.devToolsExtension)
     ? window.devToolsExtension()(createStore)
     : createStore
 
+  const sagaMiddleware = createSagaMiddleware()
   const createStoreWithMiddleware = applyMiddleware(
+    sagaMiddleware,
     logger
   )(create)
 
@@ -19,7 +23,13 @@ export default function configure(initialState) {
     module.hot.accept('../reducers', () => {
       store.replaceReducer(require('../reducers'))
     })
+    module.hot.accept('../sgags', () => {
+      sagas.cancel(store)
+      require('../sagas').default.start(sagaMiddleware)
+    })
   }
+
+  sagas.start(sagaMiddleware)
 
   return store
 }

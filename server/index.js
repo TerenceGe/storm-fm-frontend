@@ -5,9 +5,8 @@ import Express from 'express'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
-import { Provider } from 'react-redux'
 import path from 'path'
-import ConnectedIntlProvider from '../shared/components/ConnectedIntlProvider'
+import Provider from '../shared/components/Provider'
 import configure from '../shared/store'
 import routes from '../shared/routes'
 
@@ -64,9 +63,7 @@ app.use((req, res) => {
       } else if (renderProps) {
         const html = ReactDOMServer.renderToStaticMarkup(
           <Provider store={store}>
-            <ConnectedIntlProvider>
-              <RouterContext {...renderProps} />
-            </ConnectedIntlProvider>
+            <RouterContext {...renderProps} />
           </Provider>
         )
         const preloadedState = store.getState()
