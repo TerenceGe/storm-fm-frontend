@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
-import transit from 'transit-immutable-js'
+import Transit from 'transit-immutable-js'
 import path from 'path'
 import Provider from '../shared/components/Provider'
 import configure from '../shared/store'
@@ -32,7 +32,7 @@ const renderFullPage = (root, state) => `
   </head>
   <body>
     <div id="app">${root}</div>
-    <script>window.__PRELOADED_STATE__ = ${JSON.stringify(transit.toJSON(state))}</script>
+    <script>window.__PRELOADED_STATE__ = ${JSON.stringify(Transit.toJSON(state))}</script>
     <script src="/vendor.bundle.js?v=${__webpack_hash__}"></script>
     <script src="/bundle.js?v=${__webpack_hash__}"></script>
   </body>
