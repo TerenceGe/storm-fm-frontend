@@ -1,8 +1,10 @@
 import { take, fork, cancel } from 'redux-saga/effects'
 import tracksSaga from './tracks'
+import loggerSaga from './logger'
 
 function* rootSaga() {
   yield fork(tracksSaga)
+  yield fork(loggerSaga)
 }
 
 function createAbortableSaga(saga) {

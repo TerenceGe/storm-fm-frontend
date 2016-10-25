@@ -1,4 +1,5 @@
 {
-  "API_URL": "http://api.stormfm.io/api",
+  "ENV": "production",
+  "API_URL": "http://dev.stormfm.io:3000/api",
   "CDN_URL": "https://s3.amazonaws.com/storm-fm"
 }

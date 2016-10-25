@@ -10,9 +10,6 @@ import style from './style.css'
 class Home extends Component {
   componentDidMount() {
     this.props.actions.getTracksRequested({ page: 0, filter: 'popular' })
-    this.props.actions.getTracksRequested({ page: 1, filter: 'popular' })
-    this.props.actions.getTracksRequested({ page: 2, filter: 'popular' })
-    this.props.actions.getTracksRequested({ page: 3, filter: 'popular' })
   }
 
   render() {

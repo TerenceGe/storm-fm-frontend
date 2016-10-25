@@ -47,10 +47,10 @@ module.exports = [
       new webpack.DefinePlugin({
         'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production') }
       }),
-      // new webpack.optimize.UglifyJsPlugin({
-      //   compress: { warnings: false },
-      //   output: { comments: false }
-      // }),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: { warnings: false },
+        output: { comments: false }
+      }),
       new CleanWebpackPlugin(['static'], {
         root: path.join(__dirname, '../'),
         verbose: true,
@@ -91,10 +91,10 @@ module.exports = [
       new webpack.DefinePlugin({
         'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production') }
       }),
-      // new webpack.optimize.UglifyJsPlugin({
-      //   compress: { warnings: false },
-      //   output: { comments: false }
-      // }),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: { warnings: false },
+        output: { comments: false }
+      }),
       new ExtractTextPlugin('bundle.css', { allChunks: true })
     ]
   })

@@ -2,6 +2,7 @@
 /* global __webpack_hash__ */
 
 import Express from 'express'
+import cookieParser from 'cookie-parser'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
@@ -36,6 +37,8 @@ const renderFullPage = (root, state) => `
   </body>
   </html>
 `
+
+app.use(cookieParser())
 
 app.use('/fonts', Express.static(path.join(__dirname, '/fonts')))
 
