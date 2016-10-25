@@ -3,8 +3,8 @@ import { select } from 'redux-saga/effects'
 
 function* logger(action) {
   const newState = yield select()
-  console.log('received action:', action)
-  console.log('state become:', newState)
+  console.log('received action: ', action)
+  console.log('state become: ', newState)
 }
 
 export default function* loggerSaga() {

@@ -12,7 +12,6 @@ export default function configure(initialState) {
 
   const sagaMiddleware = createSagaMiddleware()
   const createStoreWithMiddleware = applyMiddleware(sagaMiddleware)(create)
-
   const store = createStoreWithMiddleware(rootReducer, initialState)
 
   sagas.start(sagaMiddleware)
