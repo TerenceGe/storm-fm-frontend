@@ -1,6 +1,7 @@
 /* @jsx */
 /* global __webpack_hash__ */
 
+import path from 'path'
 import Express from 'express'
 import cookieParser from 'cookie-parser'
 import React from 'react'
@@ -8,7 +9,6 @@ import ReactDOMServer from 'react-dom/server'
 import { match } from 'react-router'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
 import Transit from 'transit-immutable-js'
-import path from 'path'
 import Provider from '../shared/components/Provider'
 import configure from '../shared/store'
 import routes from '../shared/routes'

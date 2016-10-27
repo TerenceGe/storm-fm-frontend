@@ -1,8 +1,8 @@
 /* @jsx */
 
 import React from 'react'
-import '../../resources/fonts/fonts.css'
 import Header from '../../components/Header'
+import '../../resources/fonts/fonts.css'
 import style from './style.css'
 
 const App = ({ children }) => (
