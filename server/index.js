@@ -40,6 +40,14 @@ const renderFullPage = (root, state) => `
   </html>
 `
 
+const renderToString = ({ ...renderProps, store }) {
+  return ReactDOMServer.renderToStaticMarkup(
+    <Provider store={store}>
+      <ReduxAsyncConnect {...renderProps} />
+    </Provider>
+  )
+}
+
 app.use(cookieParser())
 
 app.use('/fonts', Express.static(path.join(__dirname, '/fonts')))
@@ -69,13 +77,10 @@ app.use((req, res) => {
         const store = configure()
         const rootTask = store.runSaga(sagas)
         loadOnServer({ ...renderProps, store }).then(() => {
-          const html = ReactDOMServer.renderToStaticMarkup(
-            <Provider store={store}>
-              <ReduxAsyncConnect {...renderProps} />
-            </Provider>
-          )
+          const html = renderToString({ ...renderProps, store })
           store.close()
           rootTask.done.then(() => {
+            const html = renderToString({ ...renderProps, store })
             const preloadedState = store.getState()
             res.status(200).send(renderFullPage(html, preloadedState))
           })
