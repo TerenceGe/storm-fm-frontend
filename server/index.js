@@ -5,16 +5,17 @@ import Express from 'express'
 import cookieParser from 'cookie-parser'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import { match, RouterContext } from 'react-router'
+import { match } from 'react-router'
+import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
 import Transit from 'transit-immutable-js'
 import path from 'path'
 import Provider from '../shared/components/Provider'
 import configure from '../shared/store'
 import routes from '../shared/routes'
+import sagas from '../shared/sagas'
 
 const port = 8080
 const app = new Express()
-const store = configure()
 
 const renderFullPage = (root, state) => `
   <!DOCTYPE html>
@@ -65,13 +66,20 @@ app.use((req, res) => {
       } else if (redirectLocation) {
         res.redirect(302, redirectLocation.pathname + redirectLocation.search)
       } else if (renderProps) {
-        const html = ReactDOMServer.renderToStaticMarkup(
-          <Provider store={store}>
-            <RouterContext {...renderProps} />
-          </Provider>
-        )
-        const preloadedState = store.getState()
-        res.status(200).send(renderFullPage(html, preloadedState))
+        const store = configure()
+        const rootTask = store.runSaga(sagas)
+        loadOnServer({ ...renderProps, store }).then(() => {
+          const html = ReactDOMServer.renderToStaticMarkup(
+            <Provider store={store}>
+              <ReduxAsyncConnect {...renderProps} />
+            </Provider>
+          )
+          store.close()
+          rootTask.done.then(() => {
+            const preloadedState = store.getState()
+            res.status(200).send(renderFullPage(html, preloadedState))
+          })
+        })
       } else {
         res.status(404).send('Not found!')
       }

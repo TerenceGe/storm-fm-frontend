@@ -4,7 +4,8 @@ import { getTracksRequested, getTracksSucceeded, getTracksFailed } from '../acti
 
 const initialState = Immutable.fromJS({
   data: [],
-  loading: false
+  loading: false,
+  loaded: false
 })
 
 export default handleActions({
@@ -12,7 +13,7 @@ export default handleActions({
     return state.set('loading', true)
   },
   [getTracksSucceeded] (state, action) {
-    return state.set('loading', false)
+    return state.set('loading', false).set('loaded', true)
       .update('data', v => v.push(Immutable.fromJS(action.tracks)))
   },
   [getTracksFailed] (state) {

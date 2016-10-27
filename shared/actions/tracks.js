@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions'
 
-export const getTracksRequested = createAction('get tracks requested')
-export const getTracksSucceeded = createAction('get tracks succeeded')
-export const getTracksFailed = createAction('get tracks failed')
+export const getTracksRequested = createAction('tracks/GET_REQUESTED')
+export const getTracksSucceeded = createAction('tracks/GET_SUCCEEDED')
+export const getTracksFailed = createAction('tracks/GET_FAILED')
