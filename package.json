@@ -8,7 +8,7 @@
     "npm": "^3.0.0"
   },
   "scripts": {
-    "build": "NODE_ENV=production webpack --progress --colors --watch --config tools/webpack.config.prod.js",
+    "build": "NODE_ENV=production webpack --progress --colors --config tools/webpack.config.prod.js",
     "build:dev": "NODE_ENV=development webpack --progress --colors --config tools/webpack.config.prod.js --watch",
     "client": "http-server static/ -p 8000",
     "server": "NODE_ENV=production nodemon static/app.js",
