@@ -12,10 +12,11 @@ const fetchBase = (endPoint = '/hello', method = 'GET', params = {}) => {
   const options = {
     method,
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      'Content-Type': 'application/json'
     }
   }
+
+  if (token) options.headers.Authorization = `Bearer ${token}`
 
   if (method === 'GET') {
     const queryString = `?${Object.keys(params).map(k => [k, params[k]].map(encodeURIComponent).join('=')).join('&')}`
@@ -29,6 +30,8 @@ const fetchBase = (endPoint = '/hello', method = 'GET', params = {}) => {
     return res.json()
   })
 }
+
+export const login = ({ identity, password }) => fetchBase('/auth/login', 'POST', { identity, password })
 
 export const getTracks = ({ page, filter }) => fetchBase('/tracks', 'GET', { page, filter })
 
