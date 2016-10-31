@@ -36,3 +36,7 @@ export const login = ({ identity, password }) => fetchBase('/auth/login', 'POST'
 export const getTracks = ({ page, filter }) => fetchBase('/tracks', 'GET', { page, filter })
 
 export const getTrack = id => fetchBase(`/tracks/${id}`, 'GET')
+
+export const createLike = ({ track_id }) => fetchBase('/likes', 'POST', { track_id })
+
+export const createComment = ({ track_id, parent_comment_id, body }) => fetchBase('/comments', 'POST', { track_id, parent_comment_id, body })

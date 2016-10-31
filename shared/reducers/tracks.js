@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions'
 import Immutable from 'immutable'
-import { getTracksRequested, getTracksSucceeded, getTracksFailed } from '../actions/tracks'
+import * as actions from '../actions/tracks'
 
 const initialState = Immutable.fromJS({
   data: [],
@@ -9,14 +9,14 @@ const initialState = Immutable.fromJS({
 })
 
 export default handleActions({
-  [getTracksRequested] (state) {
+  [actions.getTracksRequested] (state) {
     return state.set('loading', true)
   },
-  [getTracksSucceeded] (state, action) {
+  [actions.getTracksSucceeded] (state, action) {
     return state.set('loading', false).set('loaded', true)
-      .update('data', v => v.push(Immutable.fromJS(action.tracks)))
+      .update('data', v => v.push(Immutable.fromJS(action.payload)))
   },
-  [getTracksFailed] (state) {
+  [actions.getTracksFailed] (state) {
     return state.set('loading', false)
   }
 }, initialState)
