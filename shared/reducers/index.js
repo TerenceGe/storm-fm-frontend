@@ -4,11 +4,15 @@ import { routerReducer as routing } from 'react-router-redux'
 import intl from './intl'
 import auth from './auth'
 import tracks from './tracks'
+import likes from './likes'
+import comments from './comments'
 
 export default combineReducers({
   reduxAsyncConnect,
   routing,
   intl,
   auth,
-  tracks
+  tracks,
+  likes,
+  comments
 })

@@ -1,17 +1,17 @@
 import { takeEvery } from 'redux-saga'
 import { call, put } from 'redux-saga/effects'
 import * as api from '../utils/api'
-import { getTracksRequested, getTracksSucceeded, getTracksFailed } from '../actions/tracks'
+import * as actions from '../actions/tracks'
 
 function* getTracks(action) {
   try {
     const tracks = yield call(api.getTracks, action.payload)
-    yield put({ type: String(getTracksSucceeded), tracks })
+    yield put({ type: String(actions.getTracksSucceeded), payload: tracks })
   } catch (e) {
-    yield put({ type: String(getTracksFailed), message: e.message })
+    yield put({ type: String(actions.getTracksFailed), message: e.message })
   }
 }
 
 export default function* tracksSaga() {
-  yield* takeEvery(String(getTracksRequested), getTracks)
+  yield* takeEvery(String(actions.getTracksRequested), getTracks)
 }
