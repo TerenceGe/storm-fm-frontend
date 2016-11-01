@@ -1,11 +1,14 @@
 /* @jsx */
 
-import React from 'react'
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as AuthActions from '../../actions/auth'
 import style from './style.css'
 
 const Auth = () => (
   <div className={style.auth}>
-    <a>sign in</a>
+    <a>login</a>
   </div>
 )
 
@@ -27,13 +30,22 @@ const Branding = () => (
   </a>
 )
 
-const Header = () => (
-  <header className={style.header}>
-    <div className={style.container}>
-      <Branding />
-      <Auth />
-    </div>
-  </header>
+@connect(
+  state => ({ auth: state.auth }),
+  dispatch => ({
+    actions: bindActionCreators(AuthActions, dispatch)
+  })
 )
 
-export default Header
+export default class Header extends Component {
+  render() {
+    return (
+      <header className={style.header}>
+        <div className={style.container}>
+          <Branding />
+          <Auth />
+        </div>
+      </header>
+    )
+  }
+}
