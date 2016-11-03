@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as AuthActions from '../../actions/auth'
+import LoginModal from '../Modal/LoginModal'
 import style from './style.css'
 
 const Auth = () => (
@@ -39,11 +40,15 @@ const Branding = () => (
 
 export default class Header extends Component {
   render() {
+    const { auth } = this.props
+    const loggedin = !!auth.get('data').get('token')
     return (
       <header className={style.header}>
         <div className={style.container}>
           <Branding />
-          <Auth />
+          {
+            loggedin ? <div>{auth.get('data').get('username')}</div> : <div><Auth /><LoginModal /></div>
+          }
         </div>
       </header>
     )

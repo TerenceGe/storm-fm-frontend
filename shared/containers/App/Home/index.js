@@ -10,9 +10,9 @@ import style from './style.css'
 
 @asyncConnect([{
   promise: ({ store }) => Promise.all([
-    store.dispatch({ type: String(TracksActions.getTracksRequested), payload: { page: 6, filter: 'popular' } }),
-    store.dispatch({ type: String(TracksActions.getTracksRequested), payload: { page: 8, filter: 'popular' } }),
-    store.dispatch({ type: String(TracksActions.getTracksRequested), payload: { page: 9, filter: 'popular' } })
+    store.dispatch({ type: String(TracksActions.getTracksRequested), payload: { page: 9, filter: 'popular' } }),
+    store.dispatch({ type: String(TracksActions.getTracksRequested), payload: { page: 11, filter: 'popular' } }),
+    store.dispatch({ type: String(TracksActions.getTracksRequested), payload: { page: 12, filter: 'popular' } })
   ])
 }])
 

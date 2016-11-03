@@ -38,6 +38,7 @@
       font-size: 2rem;
       display: flex;
       align-items: center;
+      font-family: 'Open Sans Bold', 'Open Sans', Helvetica Neue, Helvetica, sans-serif;
 
       .soundwave {
         padding-right: 0.625rem;
@@ -80,6 +81,7 @@
         border: #c3121c 2px solid;
         font-weight: bold;
         font-size: 0.875rem;
+        font-family: 'Open Sans Bold', 'Open Sans', Helvetica Neue, Helvetica, sans-serif;
         text-transform: uppercase;
       }
     }
