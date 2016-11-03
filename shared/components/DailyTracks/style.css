@@ -17,8 +17,8 @@
   .date {
     color: white;
     background-color: #fa4c29;
-    font-family: "Oswald", Tahoma, Arial;
     text-transform: uppercase;
+    font-family: Tahoma, Arial;
     padding: 3px 5px;
     font-size: 0.8125rem;
     display: inline-block;

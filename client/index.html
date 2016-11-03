@@ -9,7 +9,7 @@
   <title><%= htmlWebpackPlugin.options.title || 'Storm FM'%></title>
   <link rel="shortcut icon" href="https://s3.amazonaws.com/storm-fm/favicon.png">
   <% if (htmlWebpackPlugin.options.mobile) { %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <% } %>
   <% if (htmlWebpackPlugin.options.baseHref) { %>
     <base href="<%= htmlWebpackPlugin.options.baseHref %>" />
