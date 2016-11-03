@@ -20,18 +20,22 @@
     width: calc(100% - 8rem);
 
     .info {
-      font-size: 0.875rem;
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-      display: block;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      max-width: 100%;
+      display: flex;
 
-      &:hover {
-        color: #fa4c29;
+      a {
+        font-size: 0.875rem;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 100%;
+
+        &:hover {
+          color: #fa4c29;
+        }
       }
     }
 

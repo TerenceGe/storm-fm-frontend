@@ -22,11 +22,13 @@ const fetchBase = (endPoint = '/hello', method = 'GET', params = {}) => {
     const queryString = `?${Object.keys(params).map(k => [k, params[k]].map(encodeURIComponent).join('=')).join('&')}`
     url += queryString
   } else {
-    options.body = params
+    options.body = JSON.stringify(params)
   }
 
   return fetch(url, options).then((res) => {
-    if (res.status >= 400) Promise.reject(res.json())
+    if (!res.ok) {
+      return res.json().then(e => Promise.reject(e))
+    }
     return res.json()
   })
 }
