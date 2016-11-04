@@ -74,6 +74,11 @@
       }
     }
 
+    .userInfo {
+      color: white;
+      cursor: pointer;
+    }
+
     .auth {
       a {
         color: white;

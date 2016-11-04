@@ -1,12 +1,8 @@
 /* @jsx */
 
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form/immutable'
 import Modal from '../../Modal'
-import * as ModalActions from '../../../actions/modal'
-import * as AuthActions from '../../../actions/auth'
 import style from './style.css'
 
 const validate = (values) => {
@@ -34,25 +30,18 @@ const renderField = ({ input, label, type, meta: { pristine } }) => (
   validate
 })
 
-@connect(
-  state => ({ modal: state.modal }),
-  dispatch => ({
-    actions: bindActionCreators({ ...ModalActions, ...AuthActions }, dispatch)
-  })
-)
-
 export default class LoginModal extends Component {
   submit(data) {
-    this.props.actions.loginRequested(data.toJS())
+    this.props.loginRequested(data.toJS())
   }
 
   hide() {
-    this.props.actions.hideModal()
+    this.props.hideModal()
     this.props.reset()
   }
 
   render() {
-    const { modal, handleSubmit, invalid, submitting } = this.props
+    const { modal, handleSubmit, invalid, requesting } = this.props
 
     return (
       <Modal isOpen={modal.get('active') === 'loginModal'} hide={::this.hide} title="sign in">
@@ -60,7 +49,7 @@ export default class LoginModal extends Component {
           <Field name="identity" type="text" component={renderField} label="Username or Email" />
           <Field name="password" type="password" component={renderField} label="Password" />
           <div className={`${style.formItem} ${style.button}`}>
-            <button type="submit" disabled={invalid || submitting}>Sign Up</button>
+            <button type="submit" disabled={invalid || requesting}>Sign Up</button>
           </div>
         </form>
       </Modal>
