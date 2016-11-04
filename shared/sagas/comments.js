@@ -12,6 +12,6 @@ function* createComment(action) {
   }
 }
 
-export default function* tracksSaga() {
+export default function* commentsSaga() {
   yield* takeEvery(String(actions.createCommentRequested), createComment)
 }

@@ -4,12 +4,13 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as AuthActions from '../../actions/auth'
+import * as ModalActions from '../../actions/modal'
 import LoginModal from '../Modal/LoginModal'
 import style from './style.css'
 
-const Auth = () => (
+const Auth = ({ showModal }) => (
   <div className={style.auth}>
-    <a>login</a>
+    <a onClick={showModal.bind(this, 'loginModal')}>login</a>
   </div>
 )
 
@@ -32,22 +33,31 @@ const Branding = () => (
 )
 
 @connect(
-  state => ({ auth: state.auth }),
+  state => ({ auth: state.auth, modal: state.modal }),
   dispatch => ({
-    actions: bindActionCreators(AuthActions, dispatch)
+    actions: bindActionCreators({ ...AuthActions, ...ModalActions }, dispatch)
   })
 )
 
 export default class Header extends Component {
   render() {
-    const { auth } = this.props
-    const loggedin = !!auth.get('data').get('token')
+    const { auth, modal, actions } = this.props
+    const loggedIn = !!auth.get('data').get('token')
+
     return (
       <header className={style.header}>
         <div className={style.container}>
           <Branding />
           {
-            loggedin ? <div>{auth.get('data').get('username')}</div> : <div><Auth /><LoginModal /></div>
+            loggedIn ? <div className={style.userInfo}>{auth.get('data').get('username')}</div> : <div>
+              <Auth showModal={actions.showModal} />
+              <LoginModal
+                modal={modal}
+                loginRequested={actions.loginRequested}
+                hideModal={actions.hideModal}
+                requesting={auth.get('loading')}
+              />
+            </div>
           }
         </div>
       </header>

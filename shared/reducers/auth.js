@@ -1,9 +1,12 @@
 import { handleActions } from 'redux-actions'
+import cookie from 'react-cookie'
 import Immutable from 'immutable'
 import * as actions from '../actions/auth'
 
 const initialState = Immutable.fromJS({
-  data: {},
+  data: {
+    token: cookie.load('token') || ''
+  },
   loading: false,
   loaded: false
 })

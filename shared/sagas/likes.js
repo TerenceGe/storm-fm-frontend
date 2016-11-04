@@ -12,6 +12,6 @@ function* createLike(action) {
   }
 }
 
-export default function* tracksSaga() {
+export default function* likesSaga() {
   yield* takeEvery(String(actions.createLikeRequested), createLike)
 }

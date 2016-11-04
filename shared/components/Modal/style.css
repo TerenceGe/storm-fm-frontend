@@ -1,3 +1,21 @@
+@keyframes fadeIn {
+  0% {
+    background-color: rgba(0,0,0,0);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes zigma {
 	0% {
     transform: perspective(800px) rotateY(90deg);
@@ -16,17 +34,26 @@
 }
 
 .background {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  right: 0;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
   z-index: 99999997;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
-  transition: all 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  &.shown {
+    display: flex;
+    animation: fadeIn 0.5s;
+  }
+
+  &.hidden {
+    display: none;
+    animation: fadeOut 0.8s;
+  }
 
   .container {
     transform: perspective(400px);
@@ -63,6 +90,8 @@
           color: #5c5c5c;
           cursor: pointer;
           transition: all 0.3s ease;
+          padding-bottom: .625rem;
+          line-height: 1;
 
           &:hover {
             color: white;
