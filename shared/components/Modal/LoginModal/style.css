@@ -7,6 +7,17 @@
     position: relative;
     font-size: 0.875rem;
     padding-bottom: 0.625rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .error {
+      color: white;
+      max-width: 13rem;
+      display: flex;
+      white-space: nowrap;
+    }
 
     &.button button {
       background: #cc1313;
@@ -19,6 +30,8 @@
       font-size: 0.75rem;
       padding: 0.25rem 0.5rem;
       line-height: 1;
+      display: flex;
+      align-items: center;
     }
 
     &:last-of-type {

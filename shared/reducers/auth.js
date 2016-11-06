@@ -13,13 +13,13 @@ const initialState = Immutable.fromJS({
 
 export default handleActions({
   [actions.loginRequested] (state) {
-    return state.set('loading', true)
+    return state.delete('error').set('loading', true)
   },
   [actions.loginSucceeded] (state, action) {
     return state.set('loading', false).set('loaded', true)
       .update('data', v => v.merge(Immutable.fromJS(action.payload)))
   },
-  [actions.loginFailed] (state) {
-    return state.set('loading', false)
+  [actions.loginFailed] (state, action) {
+    return state.set('loading', false).merge(Immutable.fromJS({ error: action.payload }))
   }
 }, initialState)

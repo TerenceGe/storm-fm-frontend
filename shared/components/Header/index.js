@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as AuthActions from '../../actions/auth'
 import * as ModalActions from '../../actions/modal'
-import LoginModal from '../Modal/LoginModal'
+import LoginModal from '../../components/Modal/LoginModal'
 import style from './style.css'
 
 const Auth = ({ showModal }) => (
@@ -55,7 +55,7 @@ export default class Header extends Component {
                 modal={modal}
                 loginRequested={actions.loginRequested}
                 hideModal={actions.hideModal}
-                requesting={auth.get('loading')}
+                auth={auth}
               />
             </div>
           }
