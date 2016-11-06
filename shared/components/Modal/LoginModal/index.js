@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form/immutable'
 import Modal from '../../Modal'
+import Spinner from '../../Spinner'
 import style from './style.css'
 
 const validate = (values) => {
@@ -41,7 +42,10 @@ export default class LoginModal extends Component {
   }
 
   render() {
-    const { modal, handleSubmit, invalid, requesting } = this.props
+    const { modal, handleSubmit, invalid, auth } = this.props
+    const loading = auth.get('loading')
+    const error = auth.get('error')
+    const disabled = invalid || loading
 
     return (
       <Modal isOpen={modal.get('active') === 'loginModal'} hide={::this.hide} title="sign in">
@@ -49,7 +53,8 @@ export default class LoginModal extends Component {
           <Field name="identity" type="text" component={renderField} label="Username or Email" />
           <Field name="password" type="password" component={renderField} label="Password" />
           <div className={`${style.formItem} ${style.button}`}>
-            <button type="submit" disabled={invalid || requesting}>Sign Up</button>
+            <button type="submit" disabled={disabled}>Sign Up { loading && <Spinner /> }</button>
+            <div className={style.error}>{error}</div>
           </div>
         </form>
       </Modal>

@@ -2,8 +2,8 @@
 
 import React from 'react'
 import { FormattedDate } from 'react-intl'
-import style from './style.css'
 import Track from '../Track'
+import style from './style.css'
 
 const DailyTracks = ({ date, tracks }) => (
   <div className={style.dailyTracks}>

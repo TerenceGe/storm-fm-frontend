@@ -9,7 +9,7 @@ function* login(action) {
     const auth = yield call(api.login, action.payload)
     yield put({ type: String(actions.loginSucceeded), payload: auth })
   } catch (e) {
-    yield put({ type: String(actions.loginFailed), message: e.message })
+    yield put({ type: String(actions.loginFailed), payload: e.message })
   }
 }
 
