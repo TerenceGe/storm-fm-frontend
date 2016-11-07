@@ -1,6 +1,7 @@
 /* @jsx */
 
 import React from 'react'
+import 'normalize.css'
 import Header from '../../components/Header'
 import '../../resources/fonts/fonts.css'
 import style from './style.css'

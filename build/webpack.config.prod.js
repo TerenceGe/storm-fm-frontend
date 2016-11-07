@@ -15,6 +15,8 @@ fs.readdirSync('node_modules')
   nodeModules[module] = `commonjs ${ module }`
 })
 
+delete nodeModules['normalize.css']
+
 module.exports = [
   extend(true, {}, config, {
     context: path.join(__dirname, '../client'),
