@@ -26,7 +26,7 @@ module.exports = {
         include: /shared/,
         loader: ExtractTextPlugin.extract(
           'style-loader',
-          'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[local]___[hash:base64:5]!postcss-loader'
+          'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[local]_[hash:base64:5]!postcss-loader'
         )
       },
       {
