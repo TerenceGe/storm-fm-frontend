@@ -8,11 +8,10 @@ import * as TracksActions from '../../../actions/tracks'
 import style from './style.css'
 
 @asyncConnect([{
-  promise: ({ store }) => Promise.all([
-    store.dispatch({ type: String(TracksActions.getTracksRequested), payload: { page: 13, filter: 'popular' } }),
-    store.dispatch({ type: String(TracksActions.getTracksRequested), payload: { page: 15, filter: 'popular' } }),
-    store.dispatch({ type: String(TracksActions.getTracksRequested), payload: { page: 16, filter: 'popular' } })
-  ])
+  promise: ({ store }) => store.dispatch({
+    type: String(TracksActions.getTracksRequested),
+    payload: { page: 14, filter: 'popular' }
+  })
 }])
 
 @connect(
@@ -25,7 +24,10 @@ export default class Home extends Component {
       <div className={style.home}>
         {
           this.props.tracks.get('data').map(dailyTracks =>
-            !!dailyTracks.get('count') && <DailyTracks date={dailyTracks.get('date')} tracks={dailyTracks.get('tracks')} />
+            <DailyTracks
+              date={dailyTracks.get('tracks').get(0).get('created_at')}
+              tracks={dailyTracks.get('tracks')}
+            />
           )
         }
       </div>
