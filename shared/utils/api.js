@@ -5,7 +5,7 @@ import { API_URL } from '../constants/env'
 
 es6promise.polyfill()
 
-const fetchBase = (endPoint = '/hello', method = 'GET', params = {}) => {
+const fetchBase = (method = 'GET', endPoint = '/hello', params = {}) => {
   const token = cookie.load('sf_jwt') || ''
   let url = API_URL + endPoint
 
@@ -33,12 +33,12 @@ const fetchBase = (endPoint = '/hello', method = 'GET', params = {}) => {
   })
 }
 
-export const login = ({ identity, password }) => fetchBase('/auth/login', 'POST', { identity, password })
+export const login = ({ identity, password }) => fetchBase('POST', '/auth/login', { identity, password })
 
-export const getTracks = ({ page, filter }) => fetchBase('/tracks', 'GET', { page, filter })
+export const getTracks = ({ page, filter }) => fetchBase('GET', '/tracks', { page, filter })
 
-export const getTrack = id => fetchBase(`/tracks/${id}`, 'GET')
+export const getTrack = id => fetchBase('GET', `/tracks/${id}`)
 
-export const createLike = ({ track_id }) => fetchBase('/likes', 'POST', { track_id })
+export const createLike = ({ track_id }) => fetchBase('POST', '/likes', { track_id })
 
-export const createComment = ({ track_id, parent_comment_id, body }) => fetchBase('/comments', 'POST', { track_id, parent_comment_id, body })
+export const createComment = ({ track_id, parent_comment_id, body }) => fetchBase('POST', '/comments', { track_id, parent_comment_id, body })
