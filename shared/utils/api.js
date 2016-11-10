@@ -6,7 +6,7 @@ import { API_URL } from '../constants/env'
 es6promise.polyfill()
 
 const fetchBase = (method = 'GET', endPoint = '/hello', params = {}) => {
-  const token = cookie.load('sf_jwt') || ''
+  const token = cookie.load('token') || ''
   let url = API_URL + endPoint
 
   const options = {
@@ -34,6 +34,8 @@ const fetchBase = (method = 'GET', endPoint = '/hello', params = {}) => {
 }
 
 export const login = ({ identity, password }) => fetchBase('POST', '/auth/login', { identity, password })
+
+export const getCurrentUser = () => fetchBase('GET', '/me')
 
 export const getTracks = ({ page, filter }) => fetchBase('GET', '/tracks', { page, filter })
 

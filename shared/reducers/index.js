@@ -5,6 +5,7 @@ import { reducer as form } from 'redux-form/immutable'
 import modal from './modal'
 import intl from './intl'
 import auth from './auth'
+import me from './me'
 import tracks from './tracks'
 import likes from './likes'
 import comments from './comments'
@@ -16,6 +17,7 @@ export default combineReducers({
   modal,
   intl,
   auth,
+  me,
   tracks,
   likes,
   comments
