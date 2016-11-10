@@ -33,7 +33,11 @@ const Branding = () => (
 )
 
 @connect(
-  state => ({ auth: state.auth, modal: state.modal }),
+  state => ({
+    auth: state.auth,
+    me: state.me,
+    modal: state.modal
+  }),
   dispatch => ({
     actions: bindActionCreators({ ...AuthActions, ...ModalActions }, dispatch)
   })
@@ -41,15 +45,15 @@ const Branding = () => (
 
 export default class Header extends Component {
   render() {
-    const { auth, modal, actions } = this.props
-    const loggedIn = !!auth.get('data').get('token')
+    const { me, auth, modal, actions } = this.props
+    const loggedIn = !!me.get('data').size
 
     return (
       <header className={style.header}>
         <div className={style.container}>
           <Branding />
           {
-            loggedIn ? <div className={style.userInfo}>{auth.get('data').get('username')}</div> : <div>
+            loggedIn ? <div className={style.userInfo}>{me.get('data').get('username')}</div> : <div>
               <Auth showModal={actions.showModal} />
               <LoginModal
                 modal={modal}

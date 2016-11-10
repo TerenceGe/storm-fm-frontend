@@ -5,6 +5,7 @@ import path from 'path'
 import Express from 'express'
 import cookieParser from 'cookie-parser'
 import React from 'react'
+import cookie from 'react-cookie'
 import ReactDOMServer from 'react-dom/server'
 import { match } from 'react-router'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
@@ -66,6 +67,7 @@ app.use((req, res) => {
       } else if (redirectLocation) {
         res.redirect(302, redirectLocation.pathname + redirectLocation.search)
       } else if (renderProps) {
+        cookie.setRawCookie(req.headers.cookie)
         const store = configure()
         const rootTask = store.runSaga(sagas)
         loadOnServer({ ...renderProps, store }).then(() => {
