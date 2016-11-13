@@ -8,11 +8,11 @@
     "npm": "^3.0.0"
   },
   "scripts": {
-    "build": "NODE_ENV=production webpack --progress --colors --config build/webpack.config.prod.js",
-    "build:dev": "NODE_ENV=development webpack --progress --colors --config build/webpack.config.prod.js",
+    "build": "NODE_ENV=production webpack --progress --colors --config webpack.config.prod.js",
+    "build:dev": "NODE_ENV=development webpack --progress --colors --config webpack.config.prod.js",
     "client": "http-server static/ -p 8000",
     "server": "NODE_ENV=production nodemon static/app.js",
-    "start": "webpack-dev-server -d --config build/webpack.config.dev.js --history-api-fallback --hot --inline --progress --color --port 3008 --host 0.0.0.0",
+    "start": "webpack-dev-server -d --config webpack.config.dev.js --history-api-fallback --hot --inline --progress --color --port 3008 --host 0.0.0.0",
     "test": "mocha --require babel-register --require babel-polyfill --require test/helpers/setup.js --recursive",
     "cover": "nyc --reporter=lcov --reporter=text --reporter=html --require babel-register --extension .js npm test",
     "lint": "eslint client server shared test"

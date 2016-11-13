@@ -19,7 +19,7 @@ delete nodeModules['normalize.css']
 
 module.exports = [
   extend(true, {}, config, {
-    context: path.join(__dirname, '../client'),
+    context: path.join(__dirname, './client'),
     entry: {
       bundle: './index.js',
       vendor: [
@@ -38,7 +38,7 @@ module.exports = [
       ]
     },
     output: {
-      path: path.join(__dirname, '../static'),
+      path: path.join(__dirname, './static'),
       filename: 'bundle.js?v=[hash]',
       publicPath: '/'
     },
@@ -54,7 +54,7 @@ module.exports = [
         output: { comments: false }
       }),
       new CleanWebpackPlugin(['static'], {
-        root: path.join(__dirname, '../'),
+        root: path.join(__dirname, './'),
         verbose: true,
         compress: { warnings: false },
         output: { comments: false }
@@ -70,10 +70,10 @@ module.exports = [
     ]
   }),
   extend(true, {}, config, {
-    context: path.join(__dirname, '../server'),
+    context: path.join(__dirname, './server'),
     entry: './index.js',
     output: {
-      path: path.join(__dirname, '../static'),
+      path: path.join(__dirname, './static'),
       filename: 'app.js',
       libraryTarget: 'commonjs2',
       publicPath: '/'
