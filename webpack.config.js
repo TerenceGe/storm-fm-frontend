@@ -100,7 +100,23 @@ const baseConfig = {
 
 const clientConfig = extend(true, {}, baseConfig, {
   context: resolve('client'),
-  entry: './index.js',
+  entry: {
+    jsx: './index.js',
+    vendor: [
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router',
+      'react-router-redux',
+      'redux',
+      'redux-actions',
+      'intl',
+      'intl/locale-data/jsonp/en.js',
+      'intl/locale-data/jsonp/zh.js',
+      'react-intl',
+      'react-cookie'
+    ]
+  },
   output: {
     path: resolve('static'),
     filename: ifProduction('bundle.js?v=[hash]', 'bundle.js'),
@@ -111,6 +127,10 @@ const clientConfig = extend(true, {}, baseConfig, {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: ifProduction('vendor.bundle.js?v=[hash]', 'vendor.bundle.js')
     }),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production') }
@@ -184,10 +204,11 @@ const serverConfig = extend(true, {}, baseConfig, {
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production') }
     }),
-    new webpack.optimize.UglifyJsPlugin({
+    ifProduction(new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
-      output: { comments: false }
-    }),
+      output: { comments: false },
+      sourceMap: false
+    })),
     new ExtractTextPlugin({
       filename: 'bundle.css',
       disable: false,
