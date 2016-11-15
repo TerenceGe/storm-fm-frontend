@@ -1,17 +1,34 @@
 const webpack = require('webpack')
 const fs = require('fs')
 const { resolve } = require('path')
-const extend = require('extend')
 const BabiliPlugin = require("babili-webpack-plugin")
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const { getIfUtils, removeEmpty } = require('webpack-config-utils')
-
 const { ifProduction, ifNotProduction } = getIfUtils(process.env.NODE_ENV)
+const nodeModules = {}
+
+fs.readdirSync('node_modules')
+  .filter(file => !file.includes('.bin'))
+  .forEach((module) => {
+    nodeModules[module] = `commonjs ${ module }`
+  })
+
+delete nodeModules['normalize.css']
 
 const baseConfig = {
+  output: {
+    path: resolve('static'),
+    publicPath: '/'
+  },
   resolve: {
+    modules: [
+      resolve('client'),
+      resolve('server'),
+      resolve('shared'),
+      'node_modules'
+    ],
     extensions: ['.js', '.jsx', '.json']
   },
   stats: {
@@ -61,8 +78,7 @@ const baseConfig = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: { compact: false }
+        loader: 'babel-loader'
       },
       {
         test: /\.json$/,
@@ -89,57 +105,56 @@ const baseConfig = {
       {
         test: /\.svg$/,
         include: /shared\/resources\/icons/,
-        loaders: [
+        loader: [
           'babel-loader',
           'svg-react-loader'
         ]
       }
     ]
-  }
-}
-
-const clientConfig = extend(true, {}, baseConfig, {
-  context: resolve('client'),
-  entry: {
-    jsx: './index.js',
-    vendor: [
-      'react',
-      'react-dom',
-      'react-redux',
-      'react-router',
-      'react-router-redux',
-      'redux',
-      'redux-actions',
-      'intl',
-      'intl/locale-data/jsonp/en.js',
-      'intl/locale-data/jsonp/zh.js',
-      'react-intl',
-      'react-cookie'
-    ]
-  },
-  output: {
-    path: resolve('static'),
-    filename: ifProduction('bundle.js?v=[hash]', 'bundle.js'),
-    publicPath: '/'
   },
   plugins: removeEmpty([
-    new BabiliPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: ifProduction('vendor.bundle.js?v=[hash]', 'vendor.bundle.js')
-    }),
+    new webpack.ExtendedAPIPlugin(),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production') }
     }),
     ifProduction(new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      output: { comments: false },
-      sourceMap: false
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+        conditionals: true,
+        unused: true,
+        comparisons: true,
+        sequences: true,
+        dead_code: true,
+        evaluate: true,
+        if_return: true,
+        join_vars: true
+      },
+      output: {
+        comments: false
+      }
     })),
+    new ExtractTextPlugin({
+      filename: ifProduction('bundle.css?v=[hash]', 'bundle.css'),
+      disable: false,
+      allChunks: true
+    })
+  ])
+}
+
+const clientConfig = Object.assign({}, baseConfig, {
+  context: resolve('client'),
+  entry: {
+    jsx: './index.js'
+  },
+  output: Object.assign({}, baseConfig.output, {
+    filename: ifProduction('bundle.js?v=[hash]', 'bundle.js')
+  }),
+  plugins: baseConfig.plugins.concat([
     new CleanWebpackPlugin(['static'], {
       root: resolve('./'),
       verbose: true,
@@ -152,11 +167,6 @@ const clientConfig = extend(true, {}, baseConfig, {
       title: 'Storm FM',
       appMountId: 'app',
       mobile: true
-    }),
-    new ExtractTextPlugin({
-      filename: ifProduction('bundle.css?v=[hash]', 'bundle.css'),
-      disable: false,
-      allChunks: true
     })
   ]),
   devServer: {
@@ -165,27 +175,16 @@ const clientConfig = extend(true, {}, baseConfig, {
   }
 })
 
-const nodeModules = {}
-
-fs.readdirSync('node_modules')
-      .filter(file => !file.includes('.bin'))
-  .forEach((module) => {
-    nodeModules[module] = `commonjs ${ module }`
-  })
-
-delete nodeModules['normalize.css']
-
-const serverConfig = extend(true, {}, baseConfig, {
-  context: resolve('server'),
-  entry: './index.js',
-  output: {
-    path: resolve('static'),
-    filename: 'app.js',
-    libraryTarget: 'commonjs2',
-    publicPath: '/'
-  },
-  externals: nodeModules,
+const serverConfig = Object.assign({}, baseConfig, {
   target: 'node',
+  context: resolve('server'),
+  devtool: false,
+  entry: './index.js',
+  output: Object.assign({}, baseConfig.output, {
+    filename: 'app.js',
+    libraryTarget: 'commonjs2'
+  }),
+  externals: nodeModules,
   node: {
     console: false,
     global: false,
@@ -194,27 +193,7 @@ const serverConfig = extend(true, {}, baseConfig, {
     __filename: false,
     __dirname: false
   },
-  plugins: [
-    new BabiliPlugin(),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
-    }),
-    new webpack.ExtendedAPIPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production') }
-    }),
-    ifProduction(new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      output: { comments: false },
-      sourceMap: false
-    })),
-    new ExtractTextPlugin({
-      filename: 'bundle.css',
-      disable: false,
-      allChunks: true
-    })
-  ]
+  plugins: baseConfig.plugins
 })
 
 const prodConfig = [

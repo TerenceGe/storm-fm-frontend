@@ -35,7 +35,6 @@ const renderFullPage = (root, state) => `
   <body>
     <div id="app">${root}</div>
     <script>window.__PRELOADED_STATE__ = ${JSON.stringify(Transit.toJSON(state))}</script>
-    <script src="/vendor.bundle.js?v=${__webpack_hash__}"></script>
     <script src="/bundle.js?v=${__webpack_hash__}"></script>
   </body>
   </html>
@@ -49,10 +48,6 @@ app.use('/images', Express.static(path.join(__dirname, '/images')))
 
 app.get('/bundle.css', (req, res) => {
   res.sendFile(path.join(__dirname, 'bundle.css'))
-})
-
-app.get('/vendor.bundle.js', (req, res) => {
-  res.sendFile(path.join(__dirname, 'vendor.bundle.js'))
 })
 
 app.get('/bundle.js', (req, res) => {
