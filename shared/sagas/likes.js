@@ -6,9 +6,9 @@ import * as actions from '../actions/likes'
 function* createLike(action) {
   try {
     const like = yield call(api.createLike, action.payload)
-    yield put({ type: String(actions.createLikeSucceeded), payload: like })
+    yield put(actions.createLikeSucceeded(like))
   } catch (e) {
-    yield put({ type: String(actions.createLikeFailed), message: e.message })
+    yield put(actions.createLikeFailed(e.message))
   }
 }
 
