@@ -23,8 +23,7 @@ export default class Home extends Component {
     return (
       <div className={style.home}>
         {
-          this.props.tracks.get('data')
-          .map(dailyTracks =>
+          this.props.tracks.get('data').map(dailyTracks =>
             <DailyTracks
               date={dailyTracks.get('tracks').get(0).get('created_at')}
               tracks={dailyTracks.get('tracks')}

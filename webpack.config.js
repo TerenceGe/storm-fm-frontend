@@ -105,7 +105,7 @@ const baseConfig = {
       {
         test: /\.svg$/,
         include: /shared\/resources\/icons/,
-        loader: [
+        loaders: [
           'babel-loader',
           'svg-react-loader'
         ]
