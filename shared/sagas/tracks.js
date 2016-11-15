@@ -6,7 +6,9 @@ import * as actions from '../actions/tracks'
 function* getTracks(action) {
   try {
     const tracks = yield call(api.getTracks, action.payload)
-    yield put({ type: String(actions.getTracksSucceeded), payload: tracks })
+    if (tracks.tracks.length) {
+      yield put({ type: String(actions.getTracksSucceeded), payload: tracks })
+    }
   } catch (e) {
     yield put({ type: String(actions.getTracksFailed), message: e.message })
   }
