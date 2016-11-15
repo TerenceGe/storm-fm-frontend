@@ -6,9 +6,9 @@ import * as actions from '../actions/comments'
 function* createComment(action) {
   try {
     const like = yield call(api.createComment, action.payload)
-    yield put({ type: String(actions.createCommentSucceeded), payload: like })
+    yield put(actions.createCommentSucceeded(like))
   } catch (e) {
-    yield put({ type: String(actions.createCommentFailed), message: e.message })
+    yield put(actions.createCommentFailed(e.message))
   }
 }
 
