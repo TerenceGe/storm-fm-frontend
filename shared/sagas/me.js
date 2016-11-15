@@ -6,9 +6,9 @@ import * as actions from '../actions/me'
 function* getCurrentUser(action) {
   try {
     const user = yield call(api.getCurrentUser, action.payload)
-    yield put({ type: String(actions.getCurrentUserSucceeded), payload: user })
+    yield put(actions.getCurrentUserSucceeded(user))
   } catch (e) {
-    yield put({ type: String(actions.getCurrentUserFailed), payload: e.message })
+    yield put(actions.getCurrentUserFailed(e.message))
   }
 }
 

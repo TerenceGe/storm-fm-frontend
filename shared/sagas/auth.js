@@ -8,9 +8,9 @@ import { getCurrentUserRequested } from '../actions/me'
 function* login(action) {
   try {
     const auth = yield call(api.login, action.payload)
-    yield put({ type: String(actions.loginSucceeded), payload: auth })
+    yield put(actions.loginSucceeded(auth))
   } catch (e) {
-    yield put({ type: String(actions.loginFailed), payload: e.message })
+    yield put(actions.loginFailed(e.message))
   }
 }
 
@@ -19,7 +19,7 @@ function* loginSucceeded(action) {
     path: '/',
     domain: 'stormfm.io'
   })
-  yield put({ type: String(getCurrentUserRequested) })
+  yield put(getCurrentUserRequested())
 }
 
 export default function* authSaga() {
