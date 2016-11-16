@@ -1,7 +1,7 @@
 /* @jsx */
 
 import React, { Component } from 'react'
-import { Field, reduxForm } from 'redux-form/immutable'
+import { Field, reduxForm } from 'redux-form/es/immutable'
 import Modal from '../../Modal'
 import Spinner from '../../Spinner'
 import style from './style.css'
