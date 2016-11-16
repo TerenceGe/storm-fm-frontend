@@ -43,7 +43,7 @@
     "redux-saga": "^0.12.0",
     "reselect": "^2.5.4",
     "transit-immutable-js": "^0.6.0",
-    "webpack": "^2.1.0-beta.27"
+    "transit-js": "^0.8.846"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.1",
@@ -103,7 +103,7 @@
     "style-loader": "^0.13.1",
     "svg-react-loader": "^0.3.7",
     "url-loader": "^0.5.7",
-    "webpack": "^2.1.0-beta.26",
+    "webpack": "^2.1.0-beta.27",
     "webpack-config-utils": "^2.1.0",
     "webpack-dev-middleware": "^1.8.3",
     "webpack-dev-server": "^2.1.0-beta.11",
