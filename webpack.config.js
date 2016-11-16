@@ -1,10 +1,11 @@
 const webpack = require('webpack')
 const fs = require('fs')
 const { resolve } = require('path')
-const BabiliPlugin = require("babili-webpack-plugin")
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+const Visualizer = require('webpack-visualizer-plugin')
 const { getIfUtils, removeEmpty } = require('webpack-config-utils')
 const { ifProduction, ifNotProduction } = getIfUtils(process.env.NODE_ENV)
 const nodeModules = {}
@@ -113,6 +114,8 @@ const baseConfig = {
     ]
   },
   plugins: removeEmpty([
+    ifNotProduction(new Visualizer()),
+    new LodashModuleReplacementPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false
@@ -149,12 +152,27 @@ const baseConfig = {
 const clientConfig = Object.assign({}, baseConfig, {
   context: resolve('client'),
   entry: {
-    jsx: './index.js'
+    jsx: './index.js',
+    vendor: [
+      'react',
+      'redux',
+      'immutable',
+      'react-router',
+      'react-router-redux',
+      'redux-actions',
+      'redux-form',
+      'redux-saga',
+      'react-intl'
+    ]
   },
   output: Object.assign({}, baseConfig.output, {
     filename: ifProduction('bundle.js?v=[hash]', 'bundle.js')
   }),
   plugins: baseConfig.plugins.concat([
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: ifProduction('vendor.bundle.js?v=[hash]', 'vendor.bundle.js')
+    }),
     new CleanWebpackPlugin(['static'], {
       root: resolve('./'),
       verbose: true,

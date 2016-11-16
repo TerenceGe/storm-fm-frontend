@@ -3,7 +3,8 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router, browserHistory } from 'react-router'
+import browserHistory from 'react-router/lib/browserHistory'
+import Router from 'react-router/lib/Router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { ReduxAsyncConnect } from 'redux-connect'
 import Transit from 'transit-immutable-js'
