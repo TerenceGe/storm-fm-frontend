@@ -3,10 +3,8 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import browserHistory from 'react-router/lib/browserHistory'
-import { Router } from 'react-router'
+import { Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-import { ReduxAsyncConnect } from 'redux-connect'
 import Transit from 'transit-immutable-js'
 import Provider from '../shared/components/Provider'
 import configure from '../shared/store'
@@ -21,7 +19,7 @@ store.runSaga(sagas)
 
 const App = () => (
   <Provider store={store}>
-    <Router render={props => <ReduxAsyncConnect {...props} />} history={history} routes={routes} />
+    <Router history={history} routes={routes} />
   </Provider>
 )
 

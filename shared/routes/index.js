@@ -1,8 +1,7 @@
 /* @jsx */
 
 import React from 'react'
-import Route from 'react-router/lib/Route'
-import { IndexRoute } from 'react-router'
+import Match from 'react-router/Match'
 import App from '../containers/App'
 import Home from '../containers/App/Home'
 import Tracks from '../containers/App/Tracks'

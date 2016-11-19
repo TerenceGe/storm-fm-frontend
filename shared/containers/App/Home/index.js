@@ -1,18 +1,10 @@
 /* @jsx */
 
 import React, { Component } from 'react'
-import { asyncConnect } from 'redux-connect'
 import { connect } from 'react-redux'
 import DailyTracks from '../../../components/DailyTracks'
 import * as TracksActions from '../../../actions/tracks'
 import style from './style.css'
-
-@asyncConnect([{
-  promise: ({ store }) => store.dispatch({
-    type: String(TracksActions.getTracksRequested),
-    payload: { page: 25, filter: 'popular' }
-  })
-}])
 
 @connect(
   state => ({ tracks: state.tracks })

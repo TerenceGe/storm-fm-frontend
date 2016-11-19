@@ -2,21 +2,11 @@
 
 import React, { Component } from 'react'
 import cookie from 'react-cookie'
-import { asyncConnect } from 'redux-connect'
 import 'normalize.css'
 import '../../resources/fonts/fonts.css'
 import style from './style.css'
 import Header from '../../components/Header'
 import * as MeActions from '../../actions/me'
-
-@asyncConnect([{
-  promise: ({ store }) => {
-    if (!cookie.load('token')) return
-    store.dispatch({
-      type: String(MeActions.getCurrentUserRequested)
-    })
-  }
-}])
 
 export default class App extends Component {
   render() {
