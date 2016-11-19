@@ -3,7 +3,6 @@ const fs = require('fs')
 const { resolve } = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const Visualizer = require('webpack-visualizer-plugin')
 const { getIfUtils, removeEmpty } = require('webpack-config-utils')
@@ -173,12 +172,6 @@ const clientConfig = Object.assign({}, baseConfig, {
       name: 'vendor',
       filename: ifProduction('vendor.bundle.js?v=[hash]', 'vendor.bundle.js')
     }),
-    new CleanWebpackPlugin(['static'], {
-      root: resolve('./'),
-      verbose: true,
-      compress: { warnings: false },
-      output: { comments: false }
-    }),
     new HtmlWebpackPlugin({
       inject: false,
       template: 'index.html',
@@ -214,9 +207,9 @@ const serverConfig = Object.assign({}, baseConfig, {
   plugins: baseConfig.plugins
 })
 
-const prodConfig = [
-  clientConfig,
-  serverConfig
-]
+const configs = {
+  web: clientConfig,
+  node: serverConfig
+}
 
-module.exports = process.env.NODE_ENV === 'development' ? clientConfig : prodConfig
+module.exports = configs[process.env.TARGET]

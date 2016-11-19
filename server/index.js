@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser'
 import React from 'react'
 import cookie from 'react-cookie'
 import ReactDOMServer from 'react-dom/server'
-import match from 'react-router/lib/match'
+import { match } from 'react-router'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
 import Transit from 'transit-immutable-js'
 import Provider from '../shared/components/Provider'
@@ -15,7 +15,7 @@ import configure from '../shared/store'
 import routes from '../shared/routes'
 import sagas from '../shared/sagas'
 
-const port = 8080
+const port = 8088
 const app = new Express()
 
 const renderFullPage = (root, state) => `

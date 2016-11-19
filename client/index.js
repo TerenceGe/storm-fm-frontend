@@ -4,7 +4,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import browserHistory from 'react-router/lib/browserHistory'
-import Router from 'react-router/lib/Router'
+import { Router } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { ReduxAsyncConnect } from 'redux-connect'
 import Transit from 'transit-immutable-js'
