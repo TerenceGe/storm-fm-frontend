@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import * as AuthActions from '../../actions/auth'
 import * as ModalActions from '../../actions/modal'
 import LoginModal from '../../components/Modal/LoginModal'
@@ -21,7 +22,7 @@ const SoundWave = () => (
 )
 
 const Branding = () => (
-  <a className={style.branding}>
+  <Link to="/" className={style.branding}>
     <SoundWave />
     <div className={style.title}>
       <span>ST</span>
@@ -29,7 +30,7 @@ const Branding = () => (
       <span>FM</span>
       <span>.</span>
     </div>
-  </a>
+  </Link>
 )
 
 @connect(

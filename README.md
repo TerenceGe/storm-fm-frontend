@@ -2,7 +2,7 @@
 
 ## Setup
 ```sh
-npm install
+yarn install
 ```
 
 ## run

@@ -3,7 +3,6 @@ const fs = require('fs')
 const { resolve } = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const Visualizer = require('webpack-visualizer-plugin')
 const { getIfUtils, removeEmpty } = require('webpack-config-utils')
@@ -21,6 +20,7 @@ delete nodeModules['normalize.css']
 const baseConfig = {
   output: {
     path: resolve('static'),
+    chunkFilename: 'scripts/[id].chuck.js',
     publicPath: '/'
   },
   resolve: {
@@ -142,7 +142,7 @@ const baseConfig = {
       }
     })),
     new ExtractTextPlugin({
-      filename: ifProduction('bundle.css?v=[hash]', 'bundle.css'),
+      filename: ifProduction('styles/bundle.css?v=[hash]', 'styles/bundle.css'),
       disable: false,
       allChunks: true
     })
@@ -166,18 +166,12 @@ const clientConfig = Object.assign({}, baseConfig, {
     ]
   },
   output: Object.assign({}, baseConfig.output, {
-    filename: ifProduction('bundle.js?v=[hash]', 'bundle.js')
+    filename: ifProduction('scripts/bundle.js?v=[hash]', 'scripts/bundle.js')
   }),
   plugins: baseConfig.plugins.concat([
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: ifProduction('vendor.bundle.js?v=[hash]', 'vendor.bundle.js')
-    }),
-    new CleanWebpackPlugin(['static'], {
-      root: resolve('./'),
-      verbose: true,
-      compress: { warnings: false },
-      output: { comments: false }
+      filename: ifProduction('scripts/vendor.bundle.js?v=[hash]', 'scripts/vendor.bundle.js')
     }),
     new HtmlWebpackPlugin({
       inject: false,
@@ -214,9 +208,9 @@ const serverConfig = Object.assign({}, baseConfig, {
   plugins: baseConfig.plugins
 })
 
-const prodConfig = [
-  clientConfig,
-  serverConfig
-]
+const configs = {
+  web: clientConfig,
+  node: serverConfig
+}
 
-module.exports = process.env.NODE_ENV === 'development' ? clientConfig : prodConfig
+module.exports = configs[process.env.TARGET]
