@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import style from './style.css'
 import * as ModalActions from '../../actions/modal'
 import LikeIcon from '../../resources/icons/LikeIcon'
@@ -33,12 +34,12 @@ export default class Track extends Component {
           <div className={style.description}>{data.get('description')}</div>
         </div>
         <div className={style.rightContainer}>
-          <a className={style.comments}>
+          <Link to="/tracks" className={style.comments}>
             <div className={style.icon}>
               <CommentIcon />
             </div>
             <div className={style.count}>{data.get('comment_count')}</div>
-          </a>
+          </Link>
           <a className={style.likes} onClick={actions.showModal.bind(this, 'loginModal')}>
             <div className={style.icon}>
               <LikeIcon />
