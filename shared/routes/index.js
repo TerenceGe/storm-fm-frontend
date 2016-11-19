@@ -1,17 +1,29 @@
-/* @jsx */
-
-import React from 'react'
-import Route from 'react-router/lib/Route'
-import { IndexRoute } from 'react-router'
 import App from '../containers/App'
-import Home from '../containers/App/Home'
-import Tracks from '../containers/App/Tracks'
 
-const Routes = (
-  <Route path="/" component={App}>
-    <IndexRoute component={Home} />
-    <Route path="tracks" component={Tracks} />
-  </Route>
-)
+const errorLoading = err => console.error('Dynamic page loading failed', err)
 
-export default Routes
+const loadRoute = cb => (module) => {
+  cb(null, module.default)
+}
+
+export default {
+  component: App,
+  childRoutes: [
+    {
+      path: '/',
+      getComponent(location, cb) {
+        System.import('../containers/App/Home')
+          .then(loadRoute(cb))
+          .catch(errorLoading)
+      }
+    },
+    {
+      path: 'tracks',
+      getComponent(location, cb) {
+        System.import('../containers/App/Tracks')
+          .then(loadRoute(cb))
+          .catch(errorLoading)
+      }
+    }
+  ]
+}
