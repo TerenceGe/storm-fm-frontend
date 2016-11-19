@@ -19,6 +19,9 @@
     "lint": "eslint client server shared test"
   },
   "dependencies": {
+    "babel-plugin-dynamic-import-node": "^1.0.0",
+    "babel-plugin-dynamic-import-webpack": "^1.0.1",
+    "babel-plugin-system-import-transformer": "^2.4.0",
     "classnames": "^2.2.5",
     "cookie-parser": "^1.4.3",
     "es6-promise": "^4.0.5",
@@ -33,7 +36,7 @@
     "react-intl": "^2.1.5",
     "react-motion": "^0.4.5",
     "react-redux": "^4.4.5",
-    "react-router": "^3.0.0",
+    "react-router": "2.8.1",
     "react-router-redux": "^4.0.6",
     "react-router-transition": "0.0.6",
     "redux": "^3.6.0",

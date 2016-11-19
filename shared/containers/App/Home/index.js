@@ -10,7 +10,7 @@ import style from './style.css'
 @asyncConnect([{
   promise: ({ store }) => store.dispatch({
     type: String(TracksActions.getTracksRequested),
-    payload: { page: 25, filter: 'popular' }
+    payload: { page: 26, filter: 'popular' }
   })
 }])
 
