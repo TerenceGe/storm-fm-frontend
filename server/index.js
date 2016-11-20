@@ -30,13 +30,13 @@ const renderFullPage = (root, state) => `
     <title>Storm FM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <link rel="shortcut icon" href="https://s3.amazonaws.com/storm-fm/favicon.png">
-    <link href="/bundle.css?v=${__webpack_hash__}" rel="stylesheet">
+    <link href="styles/bundle.css?v=${__webpack_hash__}" rel="stylesheet">
   </head>
   <body>
     <div id="app">${root}</div>
     <script>window.__PRELOADED_STATE__ = ${JSON.stringify(Transit.toJSON(state))}</script>
-    <script src="/vendor.bundle.js?v=${__webpack_hash__}"></script>
-    <script src="/bundle.js?v=${__webpack_hash__}"></script>
+    <script src="scripts/vendor.bundle.js?v=${__webpack_hash__}"></script>
+    <script src="scripts/bundle.js?v=${__webpack_hash__}"></script>
   </body>
   </html>
 `
@@ -47,17 +47,9 @@ app.use('/fonts', Express.static(path.join(__dirname, '/fonts')))
 
 app.use('/images', Express.static(path.join(__dirname, '/images')))
 
-app.get('/bundle.css', (req, res) => {
-  res.sendFile(path.join(__dirname, 'bundle.css'))
-})
+app.use('/styles', Express.static(path.join(__dirname, '/styles')))
 
-app.get('/vendor.bundle.js', (req, res) => {
-  res.sendFile(path.join(__dirname, 'vendor.bundle.js'))
-})
-
-app.get('/bundle.js', (req, res) => {
-  res.sendFile(path.join(__dirname, 'bundle.js'))
-})
+app.use('/scripts', Express.static(path.join(__dirname, '/scripts')))
 
 app.use((req, res) => {
   match({ routes, location: req.url },

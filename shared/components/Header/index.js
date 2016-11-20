@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { FormattedMessage } from 'react-intl'
 import * as AuthActions from '../../actions/auth'
 import * as ModalActions from '../../actions/modal'
 import LoginModal from '../../components/Modal/LoginModal'
@@ -11,7 +12,9 @@ import style from './style.css'
 
 const Auth = ({ showModal }) => (
   <div className={style.auth}>
-    <a onClick={showModal.bind(this, 'loginModal')}>login</a>
+    <a onClick={showModal.bind(this, 'loginModal')}>
+      <FormattedMessage id="header_button_login" />
+    </a>
   </div>
 )
 

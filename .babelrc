@@ -14,6 +14,9 @@
     "transform-runtime",
     "transform-react-constant-elements",
     "transform-react-inline-elements",
-    "transform-decorators-legacy"
+    "transform-decorators-legacy",
+    ["react-intl", {
+        "messagesDir": "./static/messages/"
+    }]
   ]
 }

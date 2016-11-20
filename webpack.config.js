@@ -20,7 +20,7 @@ delete nodeModules['normalize.css']
 const baseConfig = {
   output: {
     path: resolve('static'),
-    chunkFilename: 'scripts/[id].chuck.js',
+    chunkFilename: 'scripts/[id].chuck.js?v=[hash]',
     publicPath: '/'
   },
   resolve: {
@@ -79,7 +79,12 @@ const baseConfig = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        query: {
+          plugins: process.env.TARGET === 'node' ? [
+            "system-import-transformer"
+          ] : []
+        }
       },
       {
         test: /\.json$/,
