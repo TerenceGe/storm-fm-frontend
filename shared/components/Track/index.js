@@ -10,7 +10,7 @@ import LikeIcon from '../../resources/icons/LikeIcon'
 import CommentIcon from '../../resources/icons/CommentIcon'
 
 @connect(
-  state => ({ modal: state.modal }),
+  state => ({ modal: state.get('modal') }),
   dispatch => ({
     actions: bindActionCreators(ModalActions, dispatch)
   })

@@ -9,7 +9,6 @@ import cookie from 'react-cookie'
 import ReactDOMServer from 'react-dom/server'
 import { match } from 'react-router'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
-import Transit from 'transit-immutable-js'
 import Provider from '../shared/components/Provider'
 import configure from '../shared/store'
 import routes from '../shared/routes'
@@ -34,7 +33,7 @@ const renderFullPage = (root, state) => `
   </head>
   <body>
     <div id="app">${root}</div>
-    <script>window.__PRELOADED_STATE__ = ${JSON.stringify(Transit.toJSON(state))}</script>
+    <script>window.__PRELOADED_STATE__ = ${JSON.stringify(state)}</script>
     <script src="scripts/vendor.bundle.js?v=${__webpack_hash__}"></script>
     <script src="scripts/bundle.js?v=${__webpack_hash__}"></script>
   </body>
@@ -44,11 +43,8 @@ const renderFullPage = (root, state) => `
 app.use(cookieParser())
 
 app.use('/fonts', Express.static(path.join(__dirname, '/fonts')))
-
 app.use('/images', Express.static(path.join(__dirname, '/images')))
-
 app.use('/styles', Express.static(path.join(__dirname, '/styles')))
-
 app.use('/scripts', Express.static(path.join(__dirname, '/scripts')))
 
 app.use((req, res) => {

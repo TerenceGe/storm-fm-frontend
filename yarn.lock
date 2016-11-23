@@ -5729,7 +5729,7 @@ redux-form@^6.1.1:
     lodash-es "^4.16.6"
     shallowequal "^0.2.2"
 
-redux-immutable@^3.0.8:
+redux-immutable:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/redux-immutable/-/redux-immutable-3.0.8.tgz#df5a5d601c88227ba38f474cf82f7d00e56f8c14"
   dependencies:

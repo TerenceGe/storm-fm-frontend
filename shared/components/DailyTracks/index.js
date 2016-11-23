@@ -18,7 +18,7 @@ const DailyTracks = ({ date, tracks }) => (
       </div>
     </div>
     <div>
-      {tracks.map(track => <Track data={track} />)}
+      {tracks.map((track, index) => <Track key={index} data={track} />)}
     </div>
   </div>
 )

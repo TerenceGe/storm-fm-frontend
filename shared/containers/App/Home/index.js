@@ -10,12 +10,12 @@ import style from './style.css'
 @asyncConnect([{
   promise: ({ store }) => store.dispatch({
     type: String(TracksActions.getTracksRequested),
-    payload: { page: 26, filter: 'popular' }
+    payload: { page: 30, filter: 'popular' }
   })
 }])
 
 @connect(
-  state => ({ tracks: state.tracks })
+  state => ({ tracks: state.get('tracks') })
 )
 
 export default class Home extends Component {
@@ -23,8 +23,9 @@ export default class Home extends Component {
     return (
       <div className={style.home}>
         {
-          this.props.tracks.get('data').map(dailyTracks =>
+          this.props.tracks.get('data').map((dailyTracks, index) =>
             <DailyTracks
+              key={index}
               date={dailyTracks.get('tracks').get(0).get('created_at')}
               tracks={dailyTracks.get('tracks')}
             />

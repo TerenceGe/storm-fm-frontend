@@ -38,9 +38,9 @@ const Branding = () => (
 
 @connect(
   state => ({
-    auth: state.auth,
-    me: state.me,
-    modal: state.modal
+    auth: state.get('auth'),
+    me: state.get('me'),
+    modal: state.get('modal')
   }),
   dispatch => ({
     actions: bindActionCreators({ ...AuthActions, ...ModalActions }, dispatch)
