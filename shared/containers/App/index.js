@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import cookie from 'react-cookie'
 import { asyncConnect } from 'redux-connect'
+import { spring } from 'react-motion'
 import { RouteTransition } from 'react-router-transition'
 import 'normalize.css'
 import '../../resources/fonts/style.css'
@@ -28,8 +29,8 @@ export default class App extends Component {
           <RouteTransition
             pathname={this.props.location.pathname}
             atEnter={{ opacity: 0 }}
-            atLeave={{ opacity: 0 }}
-            atActive={{ opacity: 1 }}
+            atLeave={{ opacity: spring(0) }}
+            atActive={{ opacity: spring(1) }}
           >
             {this.props.children}
           </RouteTransition>
