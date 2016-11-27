@@ -182,6 +182,9 @@ const clientConfig = Object.assign({}, baseConfig, {
     new HtmlWebpackPlugin({
       inject: false,
       template: 'index.html',
+      minify: {
+        collapseWhitespace: true
+      },
       title: 'Storm FM',
       appMountId: 'app',
       mobile: true
