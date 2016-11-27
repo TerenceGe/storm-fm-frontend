@@ -12,8 +12,9 @@ addLocaleData(zh)
 const mapStateToProps = (state) => {
   const { intl } = state
   return {
-    ...intl,
-    key: intl.locale
+    key: intl.get('locale'),
+    locale: intl.get('locale'),
+    initialNow: intl.get('initialNow')
   }
 }
 

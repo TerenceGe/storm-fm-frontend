@@ -22,7 +22,7 @@ import style from './style.css'
     modal: state.modal
   }),
   dispatch => ({
-    actions: bindActionCreators(ModalActions, dispatch)
+    actions: bindActionCreators(ModalActions, dispatch),
   })
 )
 

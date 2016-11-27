@@ -30,7 +30,7 @@ const baseConfig = {
       resolve('shared'),
       'node_modules'
     ],
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.json', '.css']
   },
   stats: {
     colors: true,
