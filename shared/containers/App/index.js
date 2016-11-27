@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import cookie from 'react-cookie'
 import { asyncConnect } from 'redux-connect'
+import { RouteTransition } from 'react-router-transition'
 import 'normalize.css'
 import '../../resources/fonts/style.css'
 import style from './style.css'
@@ -24,7 +25,14 @@ export default class App extends Component {
       <div className={style.app}>
         <div className={style.appContainer}>
           <Header />
-          {this.props.children}
+          <RouteTransition
+            pathname={this.props.location.pathname}
+            atEnter={{ opacity: 0 }}
+            atLeave={{ opacity: 0 }}
+            atActive={{ opacity: 1 }}
+          >
+            {this.props.children}
+          </RouteTransition>
         </div>
       </div>
     )

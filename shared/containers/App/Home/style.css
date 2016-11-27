@@ -1,4 +1,7 @@
 .home {
+  position: absolute;
+  left: 0;
+  right: 0;
   width: 100%;
   max-width: 55rem;
   margin: 0 auto;
