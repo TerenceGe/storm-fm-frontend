@@ -160,6 +160,7 @@ const clientConfig = Object.assign({}, baseConfig, {
     jsx: './index.js',
     vendor: [
       'react',
+      'react-dom',
       'redux',
       'immutable',
       'react-router',

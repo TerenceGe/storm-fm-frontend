@@ -2,30 +2,30 @@
 
 ## Setup
 ```sh
-yarn install
+npm install -d
 ```
 
 ## run
 ```sh
-npm start
+yarn start
 ```
 
 ## test
 ```sh
-npm test
+yarn test
 ```
 
 ## build
 ```sh
-npm run build
+yarn run build
 ```
 
 ## client rendering
 ```sh
-npm run client
+yarn run client
 ```
 
 ## server rendering
 ```sh
-npm run server
+yarn run server
 ```

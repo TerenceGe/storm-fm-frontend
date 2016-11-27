@@ -1,3 +1,3 @@
 import { createAction } from 'redux-actions'
 
-export const updateIntl = createAction('@@intl/UPDATE')
+export const changeLocale = createAction('@@intl/CHANGE_LOCALE')

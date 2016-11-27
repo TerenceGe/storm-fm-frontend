@@ -4,6 +4,7 @@
 import path from 'path'
 import Express from 'express'
 import cookieParser from 'cookie-parser'
+import compression from 'compression'
 import React from 'react'
 import cookie from 'react-cookie'
 import ReactDOMServer from 'react-dom/server'
@@ -17,6 +18,9 @@ import sagas from '../shared/sagas'
 
 const port = 8088
 const app = new Express()
+
+app.use(cookieParser())
+app.use(compression())
 
 const renderFullPage = (root, state) => `
   <!DOCTYPE html>
@@ -41,14 +45,9 @@ const renderFullPage = (root, state) => `
   </html>
 `
 
-app.use(cookieParser())
-
 app.use('/fonts', Express.static(path.join(__dirname, '/fonts')))
-
 app.use('/images', Express.static(path.join(__dirname, '/images')))
-
 app.use('/styles', Express.static(path.join(__dirname, '/styles')))
-
 app.use('/scripts', Express.static(path.join(__dirname, '/scripts')))
 
 app.use((req, res) => {

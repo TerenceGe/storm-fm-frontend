@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions'
 import { locale, messages } from '../resources/intl'
-import { updateIntl } from '../actions/intl'
+import * as actions from '../actions/intl'
 
 const initialState = {
   locale,
@@ -8,7 +8,7 @@ const initialState = {
 }
 
 export default handleActions({
-  [updateIntl] (state, action) {
+  [actions.changeLocale] (state, action) {
     return {
       locale: action.payload,
       messages: messages[action.payload]
