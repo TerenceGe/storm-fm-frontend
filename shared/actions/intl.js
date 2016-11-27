@@ -1,3 +1,4 @@
 import { createAction } from 'redux-actions'
 
-export const updateIntl = createAction('@@intl/UPDATE')
+export const setLocale = createAction('@@intl/SET_LOCALE')
+export const addMessages = createAction('@@intl/ADD_MESSAGES')

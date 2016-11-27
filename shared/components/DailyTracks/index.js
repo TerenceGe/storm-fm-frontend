@@ -5,7 +5,7 @@ import { FormattedDate } from 'react-intl'
 import Track from '../Track'
 import style from './style.css'
 
-const DailyTracks = ({ date, tracks }) => (
+const DailyTracks = ({ date, tracks, showModal }) => (
   <div className={style.dailyTracks}>
     <div className={style.dateContainer}>
       <div className={style.date}>
@@ -18,7 +18,7 @@ const DailyTracks = ({ date, tracks }) => (
       </div>
     </div>
     <div>
-      {tracks.map(track => <Track data={track} />)}
+      {tracks.map((track, index) => <Track key={index} data={track} showModal={showModal} />)}
     </div>
   </div>
 )

@@ -69,14 +69,16 @@
       align-items: center;
       height: 4rem;
       justify-content: center;
-      fill: white;
-      transition: all 0.3s ease;
+      transition: background-color 0.3s ease;
 
       .icon, .count {
         padding: 0.125rem 0;
       }
 
       .icon {
+        fill: white;
+        transition: fill 0.3s ease;
+
         svg {
           width: 0.875rem;
           height: 0.875rem;
@@ -85,24 +87,29 @@
 
       .count {
         font-size: 0.75rem;
+        color: white;
+        transition: all 0.3s ease;
       }
     }
 
     .likes {
-      color: white;
-
       &:hover {
         background-color: #fa4c29;
       }
     }
 
     .comments {
-      color: white;
-
       &:hover {
-        fill: black;
         color: black;
         background-color: white;
+
+        .icon {
+          fill: black;
+        }
+
+        .count {
+          color: black;
+        }
       }
     }
   }

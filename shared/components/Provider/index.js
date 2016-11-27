@@ -1,4 +1,5 @@
 /* @jsx */
+
 import React from 'react'
 import { connect, Provider as ReduxProvider } from 'react-redux'
 import { IntlProvider, addLocaleData } from 'react-intl'
@@ -11,8 +12,9 @@ addLocaleData(zh)
 const mapStateToProps = (state) => {
   const { intl } = state
   return {
-    ...intl,
-    key: intl.locale
+    key: intl.get('locale'),
+    locale: intl.get('locale'),
+    initialNow: intl.get('initialNow')
   }
 }
 

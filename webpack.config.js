@@ -30,7 +30,7 @@ const baseConfig = {
       resolve('shared'),
       'node_modules'
     ],
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.json', '.css']
   },
   stats: {
     colors: true,
@@ -160,6 +160,7 @@ const clientConfig = Object.assign({}, baseConfig, {
     jsx: './index.js',
     vendor: [
       'react',
+      'react-dom',
       'redux',
       'immutable',
       'react-router',
@@ -181,6 +182,9 @@ const clientConfig = Object.assign({}, baseConfig, {
     new HtmlWebpackPlugin({
       inject: false,
       template: 'index.html',
+      minify: {
+        collapseWhitespace: true
+      },
       title: 'Storm FM',
       appMountId: 'app',
       mobile: true

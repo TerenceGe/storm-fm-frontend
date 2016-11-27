@@ -1,17 +1,14 @@
 import { handleActions } from 'redux-actions'
-import { locale, messages } from '../resources/intl'
-import { updateIntl } from '../actions/intl'
+import Immutable from 'immutable'
+import * as actions from '../actions/intl'
 
-const initialState = {
-  locale,
-  messages: messages[locale]
-}
+const initialState = Immutable.fromJS({
+  locale: 'zh',
+  initialNow: Date.now()
+})
 
 export default handleActions({
-  [updateIntl] (state, action) {
-    return {
-      locale: action.payload,
-      messages: messages[action.payload]
-    }
+  [actions.setLocale] (state, action) {
+    return state.set('locale', action.payload)
   }
 }, initialState)
