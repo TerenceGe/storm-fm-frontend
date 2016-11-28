@@ -7,8 +7,10 @@ import { Link } from 'react-router'
 import { IntlProvider, FormattedMessage } from 'react-intl'
 import * as AuthActions from '../../actions/auth'
 import * as ModalActions from '../../actions/modal'
+import { getMessages } from '../../selectors/intl'
+import { getLoggedIn, getUsername } from '../../selectors/me'
 import LoginModal from '../../components/Modal/LoginModal'
-import messages from './messages'
+import i18n from './messages'
 import style from './style.css'
 
 const Auth = ({ showModal }) => (
@@ -40,9 +42,10 @@ const Branding = () => (
 @connect(
   state => ({
     auth: state.auth,
-    me: state.me,
     modal: state.modal,
-    locale: state.intl.get('locale')
+    loggedIn: getLoggedIn(state.me),
+    username: getUsername(state.me),
+    messages: getMessages(state.intl, i18n)
   }),
   dispatch => ({
     actions: bindActionCreators({ ...AuthActions, ...ModalActions }, dispatch)
@@ -51,16 +54,15 @@ const Branding = () => (
 
 export default class Header extends Component {
   render() {
-    const { me, auth, modal, locale, actions } = this.props
-    const loggedIn = !!me.get('data').size
+    const { loggedIn, username, auth, modal, messages, actions } = this.props
 
     return (
-      <IntlProvider messages={messages[locale]}>
+      <IntlProvider messages={messages}>
         <header className={style.header}>
           <div className={style.container}>
             <Branding />
             {
-              loggedIn ? <div className={style.userInfo}>{me.get('data').get('username')}</div> : <div>
+              loggedIn ? <div className={style.userInfo}>{username}</div> : <div>
                 <Auth showModal={actions.showModal} />
                 <LoginModal
                   modal={modal}
