@@ -18,5 +18,12 @@
     ["react-intl", {
         "messagesDir": "./static/messages/"
     }]
-  ]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        "es2015"
+      ]
+    }
+  }
 }

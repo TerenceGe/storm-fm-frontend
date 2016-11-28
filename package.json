@@ -14,7 +14,7 @@
     "build:server": "cross-env NODE_ENV=production TARGET=node webpack --progress --colors",
     "server": "cross-env NODE_ENV=production nodemon --icu-data-dir=/usr/local/lib/node_modules/full-ic static/app.js",
     "start": "cross-env NODE_ENV=development TARGET=web webpack-dev-server -d --history-api-fallback --hot --inline --progress --port 3008 --host 0.0.0.0",
-    "test": "mocha --require babel-register --require babel-polyfill --require test/helpers/setup.js --recursive",
+    "test": "NODE_ENV=test mocha --icu-data-dir=/usr/local/lib/node_modules/full-ic --require babel-register --require babel-polyfill --require test/helpers/setup.js --recursive",
     "cover": "nyc --reporter=lcov --reporter=text --reporter=html --require babel-register --extension .js npm test",
     "lint": "eslint client server shared test"
   },
