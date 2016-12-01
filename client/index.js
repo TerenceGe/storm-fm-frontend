@@ -24,6 +24,7 @@ match({ routes, location }, () => {
   ReactDOM.render(
     <Provider store={store}>
       <Router
+        onUpdate={() => window.scrollTo(0, 0)}
         render={props => <ReduxAsyncConnect {...props} />}
         history={history}
         routes={routes}

@@ -1,8 +1,13 @@
 # stormfm-frontend
 
+## add full icu for node
+```sh
+npm install -g full-icu
+```
+
 ## Setup
 ```sh
-npm install -d
+yarn install
 ```
 
 ## run
