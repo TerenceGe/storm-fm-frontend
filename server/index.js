@@ -8,7 +8,8 @@ import compression from 'compression'
 import React from 'react'
 import cookie from 'react-cookie'
 import ReactDOMServer from 'react-dom/server'
-import { match } from 'react-router'
+import { match, createMemoryHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
 import Transit from 'transit-immutable-js'
 import Provider from '../shared/components/Provider'
@@ -50,15 +51,18 @@ const renderFullPage = (root, state) => `
 `
 
 app.use((req, res) => {
-  match({ routes, location: req.url },
+  cookie.setRawCookie(req.headers.cookie)
+  const memoryHistory = createMemoryHistory(req.url)
+  const store = configure(memoryHistory)
+  const history = syncHistoryWithStore(memoryHistory, store)
+
+  match({ history, routes, location: req.url },
     (error, redirectLocation, renderProps) => {
       if (error) {
         res.status(500).send(error.message)
       } else if (redirectLocation) {
         res.redirect(302, redirectLocation.pathname + redirectLocation.search)
       } else if (renderProps) {
-        cookie.setRawCookie(req.headers.cookie)
-        const store = configure()
         const rootTask = store.runSaga(sagas)
         loadOnServer({ ...renderProps, store }).then(() => {
           store.close()

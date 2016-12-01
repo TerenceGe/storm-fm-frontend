@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Link } from 'react-router'
+import Lazyload from 'react-lazy-load'
 import style from './style.css'
 import LikeIcon from '../../resources/icons/LikeIcon'
 import CommentIcon from '../../resources/icons/CommentIcon'
@@ -9,7 +10,9 @@ import CommentIcon from '../../resources/icons/CommentIcon'
 const Track = ({ data, showModal }) => (
   <div className={style.track}>
     <div className={style.leftContainer}>
-      <img role="presentation" src={data.get('artwork').get('url')} />
+      <Lazyload>
+        <img role="presentation" src={data.get('artwork').get('url')} />
+      </Lazyload>
     </div>
     <div className={style.mainContainer}>
       <div key="info" className={style.info}>

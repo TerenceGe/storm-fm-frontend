@@ -32,6 +32,7 @@
     "react-cookie": "^0.4.8",
     "react-dom": "^15.3.2",
     "react-intl": "^2.1.5",
+    "react-lazy-load": "^3.0.10",
     "react-motion": "^0.4.5",
     "react-redux": "^4.4.5",
     "react-router": "2.8.1",
