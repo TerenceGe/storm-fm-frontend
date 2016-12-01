@@ -21,6 +21,10 @@ const app = new Express()
 
 app.use(cookieParser())
 app.use(compression())
+app.use('/fonts', Express.static(path.join(__dirname, '/fonts')))
+app.use('/images', Express.static(path.join(__dirname, '/images')))
+app.use('/styles', Express.static(path.join(__dirname, '/styles')))
+app.use('/scripts', Express.static(path.join(__dirname, '/scripts')))
 
 const renderFullPage = (root, state) => `
   <!DOCTYPE html>
@@ -44,11 +48,6 @@ const renderFullPage = (root, state) => `
   </body>
   </html>
 `
-
-app.use('/fonts', Express.static(path.join(__dirname, '/fonts')))
-app.use('/images', Express.static(path.join(__dirname, '/images')))
-app.use('/styles', Express.static(path.join(__dirname, '/styles')))
-app.use('/scripts', Express.static(path.join(__dirname, '/scripts')))
 
 app.use((req, res) => {
   match({ routes, location: req.url },

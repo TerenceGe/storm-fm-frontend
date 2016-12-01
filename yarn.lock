@@ -2267,6 +2267,14 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
+electrode-react-ssr-caching:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/electrode-react-ssr-caching/-/electrode-react-ssr-caching-0.1.5.tgz#979ff1efdc7927ba6162e87ad914259be50cd89f"
+  dependencies:
+    lodash "^4.13.1"
+  optionalDependencies:
+    farmhash "^1.1.1"
+
 elliptic@^6.0.0:
   version "6.3.2"
   resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.3.2.tgz#e4c81e0829cf0a65ab70e998b8232723b5c1bc48"
@@ -2749,6 +2757,12 @@ extract-text-webpack-plugin@^2.0.0-beta.4:
 extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
+
+farmhash@^1.1.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/farmhash/-/farmhash-1.2.1.tgz#2dbf12604ef5ca1f1420fb6600fccb30d5474dfd"
+  dependencies:
+    nan "^2.4.0"
 
 fast-levenshtein@~2.0.4:
   version "2.0.5"
@@ -4339,7 +4353,7 @@ mute-stream@0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.5.tgz#8fbfabb0a98a253d3184331f9e8deb7372fac6c0"
 
-nan@^2.3.0:
+nan@^2.3.0, nan@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.4.0.tgz#fb3c59d45fe4effe215f0b890f8adf6eb32d2232"
 
@@ -5559,7 +5573,15 @@ react-router@2.8.1:
     loose-envify "^1.2.0"
     warning "^3.0.0"
 
-react@^0.14.0:
+react-ssr-optimization:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/react-ssr-optimization/-/react-ssr-optimization-0.0.5.tgz#3062a2657b2bc9a1cf6a8aa9ca62fc00b4fe8eda"
+  dependencies:
+    lodash "^4.12.0"
+    lru-cache "^4.0.1"
+    react "^0.14.8"
+
+react@^0.14.0, react@^0.14.8:
   version "0.14.8"
   resolved "https://registry.yarnpkg.com/react/-/react-0.14.8.tgz#078dfa454d4745bcc54a9726311c2bf272c23684"
   dependencies:

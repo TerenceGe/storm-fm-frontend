@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { IntlProvider, FormattedMessage } from 'react-intl'
-import { getMessages } from '../../../selectors/intl'
-import i18n from './messages'
+import messages from './messages'
 import style from './style.css'
 
 @connect(
   state => ({
-    messages: getMessages(state.intl, i18n)
+    locale: state.intl.get('locale')
   })
 )
 
 export default class Tracks extends Component {
   render() {
     return (
-      <IntlProvider messages={this.props.messages}>
+      <IntlProvider messages={messages[this.props.locale]}>
         <div className={style.tracks}>
           <FormattedMessage id="tracks_head_title" />
         </div>

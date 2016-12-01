@@ -7,10 +7,9 @@ import { Link } from 'react-router'
 import { IntlProvider, FormattedMessage } from 'react-intl'
 import * as AuthActions from '../../actions/auth'
 import * as ModalActions from '../../actions/modal'
-import { getMessages } from '../../selectors/intl'
 import { getLoggedIn, getUsername } from '../../selectors/me'
 import LoginModal from '../../components/Modal/LoginModal'
-import i18n from './messages'
+import messages from './messages'
 import style from './style.css'
 
 const Auth = ({ showModal }) => (
@@ -43,9 +42,9 @@ const Branding = () => (
   state => ({
     auth: state.auth,
     modal: state.modal,
-    loggedIn: getLoggedIn(state.me),
-    username: getUsername(state.me),
-    messages: getMessages(state.intl, i18n)
+    loggedIn: getLoggedIn(state),
+    username: getUsername(state),
+    locale: state.intl.get('locale')
   }),
   dispatch => ({
     actions: bindActionCreators({ ...AuthActions, ...ModalActions }, dispatch)
@@ -54,10 +53,10 @@ const Branding = () => (
 
 export default class Header extends Component {
   render() {
-    const { loggedIn, username, auth, modal, messages, actions } = this.props
+    const { loggedIn, locale, username, auth, modal, actions } = this.props
 
     return (
-      <IntlProvider messages={messages}>
+      <IntlProvider messages={messages[locale]}>
         <header className={style.header}>
           <div className={style.container}>
             <Branding />
