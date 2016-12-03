@@ -14,7 +14,7 @@ export default function* rootSaga() {
     fork(tracksSaga),
     fork(likesSaga),
     fork(commentsSaga),
-    fork(loggerSaga),
-    fork(socketSaga)
+    fork(socketSaga),
+    fork(loggerSaga)
   ]
 }

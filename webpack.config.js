@@ -82,7 +82,7 @@ const baseConfig = {
         loader: 'babel-loader',
         query: {
           plugins: process.env.TARGET === 'node' ? [
-            "system-import-transformer"
+            'system-import-transformer'
           ] : []
         }
       },
