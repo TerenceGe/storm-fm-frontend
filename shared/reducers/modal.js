@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions'
 import Immutable from 'immutable'
-import * as actions from '../actions/modal'
+import * as actions from 'actions/modal'
 
 const initialState = Immutable.fromJS({
   isOpen: false

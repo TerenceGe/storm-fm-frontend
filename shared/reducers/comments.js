@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions'
 import Immutable from 'immutable'
-import * as actions from '../actions/comments'
+import * as actions from 'actions/comments'
 
 const initialState = Immutable.fromJS({
   data: {},

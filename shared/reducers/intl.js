@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions'
 import Immutable from 'immutable'
-import * as actions from '../actions/intl'
+import * as actions from 'actions/intl'
 
 const initialState = Immutable.fromJS({
   locale: 'zh',

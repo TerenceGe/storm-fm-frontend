@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { FormattedDate } from 'react-intl'
-import Track from '../Track'
+import Track from 'components/Track'
 import style from './style.css'
 
 const DailyTracks = ({ date, tracks, showModal }) => (

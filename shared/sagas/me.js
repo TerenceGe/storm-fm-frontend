@@ -1,7 +1,7 @@
 import { takeEvery } from 'redux-saga'
 import { call, put } from 'redux-saga/effects'
-import * as api from '../utils/api'
-import * as actions from '../actions/me'
+import * as api from 'utils/api'
+import * as actions from 'actions/me'
 
 function* getCurrentUser(action) {
   try {

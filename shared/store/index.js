@@ -2,7 +2,7 @@
 
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware, { END } from 'redux-saga'
-import rootReducer from '../reducers'
+import rootReducer from 'reducers'
 
 export default function configure (initialState) {
   const create = (typeof window !== 'undefined' && window.devToolsExtension)
