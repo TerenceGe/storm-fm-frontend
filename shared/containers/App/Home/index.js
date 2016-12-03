@@ -10,7 +10,7 @@ import * as modalActions from 'actions/modal'
 import style from './style.css'
 
 @asyncConnect([{
-  promise: ({ store }) => store.dispatch(tracksActions.getTracksRequested({ page: 39, filter: 'popular' }))
+  promise: ({ store }) => store.dispatch(tracksActions.getTracksRequested({ page: 40, filter: 'popular' }))
 }])
 
 @connect(

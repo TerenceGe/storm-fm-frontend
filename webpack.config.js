@@ -18,6 +18,7 @@ fs.readdirSync('node_modules')
 delete nodeModules['normalize.css']
 
 const baseConfig = {
+  devtool: '#source-map',
   output: {
     path: resolve('static'),
     chunkFilename: 'scripts/[id].chuck.js?v=[hash]',
