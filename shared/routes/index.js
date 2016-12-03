@@ -1,4 +1,4 @@
-import App from '../containers/App'
+import App from 'containers/App'
 
 const errorLoading = err => console.error('Dynamic page loading failed', err)
 
@@ -12,7 +12,7 @@ export default {
     {
       path: '/',
       getComponent(location, cb) {
-        System.import('../containers/App/Home')
+        System.import('containers/App/Home')
           .then(loadRoute(cb))
           .catch(errorLoading)
       }
@@ -20,7 +20,7 @@ export default {
     {
       path: 'tracks',
       getComponent(location, cb) {
-        System.import('../containers/App/Tracks')
+        System.import('containers/App/Tracks')
           .then(loadRoute(cb))
           .catch(errorLoading)
       }

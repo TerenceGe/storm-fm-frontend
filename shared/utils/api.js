@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import es6promise from 'es6-promise'
 import cookie from 'react-cookie'
-import { API_URL } from '../constants/env'
+import { API_URL } from 'constants/env'
 
 es6promise.polyfill()
 

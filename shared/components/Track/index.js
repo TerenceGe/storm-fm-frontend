@@ -3,9 +3,9 @@
 import React from 'react'
 import { Link } from 'react-router'
 import Lazyload from 'react-lazy-load'
+import LikeIcon from 'resources/icons/LikeIcon'
+import CommentIcon from 'resources/icons/CommentIcon'
 import style from './style.css'
-import LikeIcon from '../../resources/icons/LikeIcon'
-import CommentIcon from '../../resources/icons/CommentIcon'
 
 const Track = ({ data, showModal }) => (
   <div className={style.track}>

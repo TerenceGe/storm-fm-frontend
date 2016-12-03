@@ -4,9 +4,9 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { asyncConnect } from 'redux-connect'
 import { connect } from 'react-redux'
-import DailyTracks from '../../../components/DailyTracks'
-import * as tracksActions from '../../../actions/tracks'
-import * as modalActions from '../../../actions/modal'
+import DailyTracks from 'components/DailyTracks'
+import * as tracksActions from 'actions/tracks'
+import * as modalActions from 'actions/modal'
 import style from './style.css'
 
 @asyncConnect([{

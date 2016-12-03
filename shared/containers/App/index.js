@@ -4,10 +4,10 @@ import React, { Component } from 'react'
 import cookie from 'react-cookie'
 import { asyncConnect } from 'redux-connect'
 import 'normalize.css'
-import '../../resources/fonts/style.css'
-import style from './style.css'
-import Header from '../../components/Header'
-import * as meActions from '../../actions/me'
+import 'resources/fonts/style.css'
+import * as meActions from 'actions/me'
+import style from './style.css' // eslint-disable-line import/imports-first
+import Header from 'components/Header' // eslint-disable-line import/imports-first
 
 @asyncConnect([{
   promise: ({ store }) => {
