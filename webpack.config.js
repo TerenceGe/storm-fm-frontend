@@ -25,12 +25,12 @@ const baseConfig = {
   },
   resolve: {
     modules: [
+      resolve('shared'),
       resolve('client'),
       resolve('server'),
-      resolve('shared'),
       'node_modules'
     ],
-    extensions: ['.js', '.jsx', '.json', '.css']
+    extensions: ['.js', '.jsx', '.json']
   },
   stats: {
     colors: true,

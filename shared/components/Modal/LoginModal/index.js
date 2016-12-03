@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form/es/immutable'
-import Modal from '../../Modal'
-import Spinner from '../../Spinner'
+import Modal from '../../../components/Modal'
+import Spinner from '../../../components/Spinner'
 import style from './style.css'
 
 const validate = (values) => {

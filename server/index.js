@@ -67,7 +67,7 @@ app.use((req, res) => {
         loadOnServer({ ...renderProps, store }).then(() => {
           store.close()
           rootTask.done.then(() => {
-            const html = ReactDOMServer.renderToStaticMarkup(
+            const html = ReactDOMServer.renderToString(
               <Provider store={store}>
                 <ReduxAsyncConnect {...renderProps} />
               </Provider>

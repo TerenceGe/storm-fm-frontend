@@ -23,6 +23,11 @@
     "test": {
       "presets": [
         "es2015"
+      ],
+      "pulgins": [
+        ["module-resolver", {
+          "root": ["./shared"]
+        }]
       ]
     }
   }

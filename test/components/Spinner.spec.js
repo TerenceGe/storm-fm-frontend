@@ -3,8 +3,8 @@
 import React from 'react'
 import { expect } from 'chai'
 import { shallow, mount } from 'enzyme'
-import Spinner from '../../shared/components/Spinner'
-import style from '../../shared/components/Spinner/style.css'
+import Spinner from 'components/Spinner'
+import style from 'components/Spinner/style.css'
 
 describe('<Spinner /> ', () => {
   it('should render the Spinner with className \'spinner\'', () => {
