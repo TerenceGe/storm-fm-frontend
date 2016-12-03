@@ -5,15 +5,12 @@ import { bindActionCreators } from 'redux'
 import { asyncConnect } from 'redux-connect'
 import { connect } from 'react-redux'
 import DailyTracks from '../../../components/DailyTracks'
-import * as TracksActions from '../../../actions/tracks'
-import * as ModalActions from '../../../actions/modal'
+import * as tracksActions from '../../../actions/tracks'
+import * as modalActions from '../../../actions/modal'
 import style from './style.css'
 
 @asyncConnect([{
-  promise: ({ store }) => store.dispatch({
-    type: String(TracksActions.getTracksRequested),
-    payload: { page: 38, filter: 'popular' }
-  })
+  promise: ({ store }) => store.dispatch(tracksActions.getTracksRequested({ page: 39, filter: 'popular' }))
 }])
 
 @connect(
@@ -22,7 +19,7 @@ import style from './style.css'
     modal: state.modal
   }),
   dispatch => ({
-    actions: bindActionCreators(ModalActions, dispatch),
+    actions: bindActionCreators(modalActions, dispatch),
   })
 )
 

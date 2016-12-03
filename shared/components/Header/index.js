@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { IntlProvider, FormattedMessage } from 'react-intl'
-import * as AuthActions from '../../actions/auth'
-import * as ModalActions from '../../actions/modal'
+import * as authActions from '../../actions/auth'
+import * as modalActions from '../../actions/modal'
 import { getLoggedIn, getUsername } from '../../selectors/me'
 import LoginModal from '../../components/Modal/LoginModal'
 import messages from './messages'
@@ -47,7 +47,7 @@ const Branding = () => (
     locale: state.intl.get('locale')
   }),
   dispatch => ({
-    actions: bindActionCreators({ ...AuthActions, ...ModalActions }, dispatch)
+    actions: bindActionCreators({ ...authActions, ...modalActions }, dispatch)
   })
 )
 
