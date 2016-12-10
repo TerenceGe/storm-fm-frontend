@@ -47,7 +47,10 @@ const Branding = () => (
     locale: state.intl.get('locale')
   }),
   dispatch => ({
-    actions: bindActionCreators({ ...authActions, ...modalActions }, dispatch)
+    actions: bindActionCreators({
+      ...authActions,
+      ...modalActions
+    }, dispatch)
   })
 )
 

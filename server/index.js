@@ -12,6 +12,7 @@ import { match, createMemoryHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect'
 import Transit from 'transit-immutable-js'
+import { getInitialLang } from 'selectors/intl'
 import Provider from 'components/Provider'
 import configure from 'store'
 import routes from 'routes'
@@ -51,9 +52,9 @@ const renderFullPage = (root, state) => `
 `
 
 app.use((req, res) => {
-  cookie.setRawCookie(req.headers.cookie)
+  cookie.plugToRequest(req, res)
   const memoryHistory = createMemoryHistory(req.url)
-  const store = configure(memoryHistory)
+  const store = configure({ intl: getInitialLang(), ...memoryHistory })
   const history = syncHistoryWithStore(memoryHistory, store)
 
   match({ history, routes, location: req.url },
