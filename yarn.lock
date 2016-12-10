@@ -5612,15 +5612,7 @@ react-router@2.8.1:
     loose-envify "^1.2.0"
     warning "^3.0.0"
 
-react-ssr-optimization:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/react-ssr-optimization/-/react-ssr-optimization-0.0.5.tgz#3062a2657b2bc9a1cf6a8aa9ca62fc00b4fe8eda"
-  dependencies:
-    lodash "^4.12.0"
-    lru-cache "^4.0.1"
-    react "^0.14.8"
-
-react@^0.14.0, react@^0.14.8:
+react@^0.14.0:
   version "0.14.8"
   resolved "https://registry.yarnpkg.com/react/-/react-0.14.8.tgz#078dfa454d4745bcc54a9726311c2bf272c23684"
   dependencies:
@@ -6808,6 +6800,10 @@ webpack-hot-middleware@^2.12.2:
     html-entities "^1.2.0"
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
+
+webpack-node-externals:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/webpack-node-externals/-/webpack-node-externals-1.5.4.tgz#ea05ba17108a23e776c35c42e7bb0e86c225be00"
 
 webpack-sources@^0.1.0, webpack-sources@^0.1.2:
   version "0.1.3"

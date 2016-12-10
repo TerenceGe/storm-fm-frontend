@@ -57,6 +57,7 @@ const Branding = () => (
 export default class Header extends Component {
   render() {
     const { loggedIn, locale, username, auth, modal, actions } = this.props
+    console.log('Header')
 
     return (
       <IntlProvider messages={messages[locale]}>

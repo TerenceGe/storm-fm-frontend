@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const fs = require('fs')
 const { resolve } = require('path')
+const NodeExternals = require('webpack-node-externals')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
@@ -16,6 +17,7 @@ fs.readdirSync('node_modules')
   })
 
 delete nodeModules['normalize.css']
+nodeModules['react-dom/server'] = 'commonjs react-dom/server'
 
 const baseConfig = {
   devtool: '#source-map',
@@ -120,7 +122,7 @@ const baseConfig = {
     ]
   },
   plugins: removeEmpty([
-    ifNotProduction(new Visualizer()),
+    ifProduction(new Visualizer()),
     new LodashModuleReplacementPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
@@ -143,6 +145,7 @@ const baseConfig = {
         if_return: true,
         join_vars: true
       },
+      mangle: process.env.TARGET !== 'node',
       output: {
         comments: false
       }

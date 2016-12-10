@@ -5,6 +5,7 @@ import path from 'path'
 import Express from 'express'
 import cookieParser from 'cookie-parser'
 import compression from 'compression'
+import SSRCaching from 'electrode-react-ssr-caching'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import cookie from 'react-cookie'
@@ -17,16 +18,7 @@ import Provider from 'components/Provider'
 import configure from 'store'
 import routes from 'routes'
 import sagas from 'sagas'
-
-const port = 8088
-const app = new Express()
-
-app.use(cookieParser())
-app.use(compression())
-app.use('/fonts', Express.static(path.join(__dirname, '/fonts')))
-app.use('/images', Express.static(path.join(__dirname, '/images')))
-app.use('/styles', Express.static(path.join(__dirname, '/styles')))
-app.use('/scripts', Express.static(path.join(__dirname, '/scripts')))
+import cachingConfig from './cachingConfig'
 
 const renderFullPage = (root, state) => `
   <!DOCTYPE html>
@@ -51,6 +43,19 @@ const renderFullPage = (root, state) => `
   </html>
 `
 
+const port = 8088
+const app = new Express()
+
+app.use('/fonts', Express.static(path.join(__dirname, '/fonts')))
+app.use('/images', Express.static(path.join(__dirname, '/images')))
+app.use('/styles', Express.static(path.join(__dirname, '/styles')))
+app.use('/scripts', Express.static(path.join(__dirname, '/scripts')))
+
+app.use(cookieParser())
+app.use(compression())
+SSRCaching.enableCaching()
+SSRCaching.setCachingConfig(cachingConfig)
+
 app.use((req, res) => {
   cookie.plugToRequest(req, res)
   const memoryHistory = createMemoryHistory(req.url)
@@ -68,11 +73,14 @@ app.use((req, res) => {
         loadOnServer({ ...renderProps, store }).then(() => {
           store.close()
           rootTask.done.then(() => {
-            const html = ReactDOMServer.renderToStaticMarkup(
+            SSRCaching.enableProfiling()
+            SSRCaching.clearProfileData()
+            const html = ReactDOMServer.renderToString(
               <Provider store={store}>
                 <ReduxAsyncConnect {...renderProps} />
               </Provider>
             )
+            console.log(JSON.stringify(SSRCaching.profileData, null, 2))
             const preloadedState = store.getState()
             res.status(200).send(renderFullPage(html, preloadedState))
           })
