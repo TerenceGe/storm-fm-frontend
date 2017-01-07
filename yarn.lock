@@ -5788,6 +5788,10 @@ redux-immutable@^3.0.8:
   dependencies:
     immutable "^3.7.6"
 
+redux-injectable-store:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/redux-injectable-store/-/redux-injectable-store-1.0.0.tgz#27b9f602a413988e4c9b80b6b51ec742de78e251"
+
 redux-saga@^0.12.0:
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.12.1.tgz#79c9263d67486fd26a7a3d3b9df8ed65057a9fc6"
