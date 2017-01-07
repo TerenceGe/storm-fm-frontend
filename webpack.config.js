@@ -1,7 +1,6 @@
 const webpack = require('webpack')
 const fs = require('fs')
 const { resolve } = require('path')
-const NodeExternals = require('webpack-node-externals')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
@@ -122,7 +121,7 @@ const baseConfig = {
     ]
   },
   plugins: removeEmpty([
-    ifProduction(new Visualizer()),
+    ifNotProduction(new Visualizer()),
     new LodashModuleReplacementPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
@@ -163,6 +162,7 @@ const clientConfig = Object.assign({}, baseConfig, {
   entry: {
     jsx: './index.js',
     vendor: [
+      'core-js/es6',
       'react',
       'react-dom',
       'redux',

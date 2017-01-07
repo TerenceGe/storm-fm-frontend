@@ -10,7 +10,13 @@ import * as modalActions from 'actions/modal'
 import style from './style.css'
 
 @asyncConnect([{
-  promise: ({ store }) => store.dispatch(tracksActions.getTracksRequested({ page: 46, filter: 'popular' }))
+  promise: ({ store }) => {
+    Promise.all([
+      store.dispatch(tracksActions.getTracksRequested({ page: 74, filter: 'popular' })),
+      store.dispatch(tracksActions.getTracksRequested({ page: 76, filter: 'popular' })),
+      store.dispatch(tracksActions.getTracksRequested({ page: 77, filter: 'popular' }))
+    ])
+  }
 }])
 
 @connect(

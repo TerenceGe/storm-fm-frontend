@@ -20,13 +20,16 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "co": "^4.6.0",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
+    "core-js": "^2.4.1",
     "electrode-react-ssr-caching": "^0.1.5",
     "es6-promise": "^4.0.5",
     "express": "^4.14.0",
     "farmhash": "^1.2.1",
     "immutable": "^3.8.1",
+    "intl": "^1.2.5",
     "isomorphic-fetch": "^2.2.1",
     "normalize.css": "^4.2.0",
     "react": "^15.3.2",
@@ -119,7 +122,6 @@
     "webpack-dev-middleware": "^1.8.3",
     "webpack-dev-server": "^2.1.0-beta.12",
     "webpack-hot-middleware": "^2.12.2",
-    "webpack-node-externals": "^1.5.4",
     "webpack-visualizer-plugin": "^0.1.5"
   },
   "repository": {
