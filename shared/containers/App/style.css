@@ -1,3 +1,6 @@
+@import 'normalize.css';
+@import 'resources/fonts/style.css';
+
 * {
   box-sizing: border-box;
 }
@@ -20,7 +23,7 @@ body {
     left: 0;
     right: 0;
     height: 100vh;
-    background-image: url(../../resources/images/background.jpg);
+    background-image: url(resources/images/background.jpg);
     background-size: cover;
     background-position: center;
     transition: all 0.5s ease;

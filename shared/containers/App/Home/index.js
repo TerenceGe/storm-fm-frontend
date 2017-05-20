@@ -9,10 +9,6 @@ import * as tracksActions from 'actions/tracks'
 import * as modalActions from 'actions/modal'
 import style from './style.css'
 
-@asyncConnect([{
-  promise: ({ store }) => store.dispatch(tracksActions.getTracksRequested({ page: 40, filter: 'popular' }))
-}])
-
 @connect(
   state => ({
     tracks: state.tracks,
@@ -22,6 +18,15 @@ import style from './style.css'
     actions: bindActionCreators(modalActions, dispatch),
   })
 )
+
+@asyncConnect([{
+  promise: ({ store }) =>
+    store.dispatch(tracksActions.getTracksRequested([
+      { page: 208, filter: 'popular' },
+      { page: 210, filter: 'popular' },
+      { page: 211, filter: 'popular' }
+    ]))
+}])
 
 export default class Home extends Component {
   render() {

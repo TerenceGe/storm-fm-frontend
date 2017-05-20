@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const fs = require('fs')
-const { resolve } = require('path')
+const { resolve, join } = require('path')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
@@ -15,20 +16,21 @@ fs.readdirSync('node_modules')
     nodeModules[module] = `commonjs ${ module }`
   })
 
-delete nodeModules['normalize.css']
+delete nodeModules['bootstrap']
+nodeModules['react-dom/server'] = 'commonjs react-dom/server'
 
 const baseConfig = {
-  devtool: '#source-map',
+  devtool: 'inline-source-map',
   output: {
     path: resolve('static'),
-    chunkFilename: 'scripts/[id].chuck.js?v=[hash]',
+    chunkFilename: ifProduction('scripts/[id].chuck.js?v=[chunkhash]', 'scripts/[id].chuck.js'),
     publicPath: '/'
   },
   resolve: {
     modules: [
-      resolve('shared'),
       resolve('client'),
       resolve('server'),
+      resolve('shared'),
       'node_modules'
     ],
     extensions: ['.js', '.jsx', '.json']
@@ -50,8 +52,8 @@ const baseConfig = {
         test: /\.css$/,
         include: /shared/,
         loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
+          fallback: 'style-loader',
+          use: [
             {
               loader: 'css-loader',
               query: {
@@ -71,8 +73,8 @@ const baseConfig = {
         test: /\.css$/,
         exclude: /shared/,
         loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: {
+          fallback: 'style-loader',
+          use: {
             loader: 'css-loader'
           }
         })
@@ -83,7 +85,7 @@ const baseConfig = {
         loader: 'babel-loader',
         query: {
           plugins: process.env.TARGET === 'node' ? [
-            'system-import-transformer'
+            ["system-import-transformer", { "modules": "common" }]
           ] : []
         }
       },
@@ -126,9 +128,11 @@ const baseConfig = {
       minimize: true,
       debug: false
     }),
-    new webpack.ExtendedAPIPlugin(),
     new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production') }
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
+        APP_ENV: JSON.stringify(process.env.APP_ENV || 'production')
+      }
     }),
     ifProduction(new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -143,23 +147,39 @@ const baseConfig = {
         if_return: true,
         join_vars: true
       },
+      mangle: process.env.TARGET !== 'node',
       output: {
         comments: false
       }
     })),
     new ExtractTextPlugin({
       filename: ifProduction('styles/bundle.css?v=[hash]', 'styles/bundle.css'),
-      disable: false,
+      disable: process.env.NODE_ENV === 'development',
       allChunks: true
-    })
+    }),
+    new CopyWebpackPlugin([{
+      from: join(__dirname, 'shared/resources/scripts'),
+      to: join(__dirname, 'static/scripts')
+    }], { copyUnmodified: true })
   ])
 }
 
 const clientConfig = Object.assign({}, baseConfig, {
   context: resolve('client'),
   entry: {
-    jsx: './index.js',
-    vendor: [
+    jsx: ifNotProduction([
+      'react-hot-loader/patch',
+      'webpack-dev-server/client?http://0.0.0.0:3008',
+      'webpack/hot/only-dev-server',
+      './index.js'
+    ], './index.js'),
+    vendor: ifNotProduction([
+      'react-hot-loader/patch',
+      'webpack-dev-server/client?http://0.0.0.0:3008',
+      'webpack/hot/only-dev-server',
+      './index.js'
+    ], []).concat([
+      'core-js/es6',
       'react',
       'react-dom',
       'redux',
@@ -170,27 +190,30 @@ const clientConfig = Object.assign({}, baseConfig, {
       'redux-form',
       'redux-saga',
       'react-intl'
-    ]
+    ])
   },
   output: Object.assign({}, baseConfig.output, {
     filename: ifProduction('scripts/bundle.js?v=[hash]', 'scripts/bundle.js')
   }),
-  plugins: baseConfig.plugins.concat([
+  plugins: baseConfig.plugins.concat(removeEmpty([
+    ifNotProduction(new webpack.HotModuleReplacementPlugin()),
+    ifNotProduction(new webpack.NamedModulesPlugin()),
+    ifNotProduction(new webpack.NoEmitOnErrorsPlugin()),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: ifProduction('scripts/vendor.bundle.js?v=[hash]', 'scripts/vendor.bundle.js')
     }),
     new HtmlWebpackPlugin({
       inject: false,
-      template: 'index.html',
       minify: {
         collapseWhitespace: true
       },
+      template: 'index.html',
       title: 'Storm FM',
       appMountId: 'app',
       mobile: true
     })
-  ]),
+  ])),
   devServer: {
     contentBase: './client',
     hot: true
@@ -215,7 +238,9 @@ const serverConfig = Object.assign({}, baseConfig, {
     __filename: false,
     __dirname: false
   },
-  plugins: baseConfig.plugins
+  plugins: baseConfig.plugins.concat([
+    new webpack.ExtendedAPIPlugin()
+  ])
 })
 
 const configs = {

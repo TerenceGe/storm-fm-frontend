@@ -14,7 +14,7 @@ export default handleActions({
   },
   [actions.getTracksSucceeded] (state, action) {
     return state.set('loading', false).set('loaded', true)
-      .update('data', v => v.push(Immutable.fromJS(action.payload)))
+      .update('data', v => v.concat(Immutable.fromJS(action.payload)))
   },
   [actions.getTracksFailed] (state) {
     return state.set('loading', false)

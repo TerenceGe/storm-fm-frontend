@@ -1,17 +1,14 @@
-/* global window, require */
-
-import { createStore, applyMiddleware } from 'redux'
+import { createInjectableStore } from 'redux-injectable-store'
+import { applyMiddleware, compose } from 'redux'
 import createSagaMiddleware, { END } from 'redux-saga'
 import rootReducer from 'reducers'
 
 export default function configure (initialState) {
-  const create = (typeof window !== 'undefined' && window.devToolsExtension)
-    ? window.devToolsExtension()(createStore)
-    : createStore
-
   const sagaMiddleware = createSagaMiddleware()
-  const createStoreWithMiddleware = applyMiddleware(sagaMiddleware)(create)
-  const store = createStoreWithMiddleware(rootReducer, initialState)
+  const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose
+  const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware))
+  const store = createInjectableStore(initialState, enhancer)
+  store.injectAll(rootReducer)
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {

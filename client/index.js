@@ -1,15 +1,16 @@
 /* @jsx */
-/* global document, window */
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
 import { match, Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { ReduxAsyncConnect } from 'redux-connect'
 import Transit from 'transit-immutable-js'
 import Provider from 'components/Provider'
-import configure from 'store'
 import routes from 'routes'
+import { errorLoading } from 'utils/error'
+import configure from 'store'
 import sagas from 'sagas'
 
 const preloadedState = window.__PRELOADED_STATE__ && Transit.fromJSON(window.__PRELOADED_STATE__)
@@ -20,16 +21,43 @@ const location = `${pathname}${search}${hash}`
 
 store.runSaga(sagas)
 
-match({ routes, location }, () => {
+const renderApp = (routesConfig) => {
   ReactDOM.render(
-    <Provider store={store}>
-      <Router
-        onUpdate={() => window.scrollTo(0, 0)}
-        render={props => <ReduxAsyncConnect {...props} />}
-        history={history}
-        routes={routes}
-      />
-    </Provider>,
+    <AppContainer>
+      <Provider store={store}>
+        <Router
+          onUpdate={() => window.scrollTo(0, 0)}
+          render={props => <ReduxAsyncConnect {...props} />}
+          history={history}
+          routes={routesConfig}
+        />
+      </Provider>
+    </AppContainer>,
     document.getElementById('app')
   )
-})
+}
+
+async function runApp() {
+  try {
+    if (!window.Intl) {
+      await import('intl')
+      await Promise.all([
+        import('intl/locale-data/jsonp/en.js'),
+        import('intl/locale-data/jsonp/zh.js')
+      ])
+      console.log('using intl polyfill')
+    }
+  } catch (error) {
+    errorLoading(error)
+  }
+
+  match({ routes, location }, () => {
+    renderApp(routes)
+  })
+}
+
+if (module.hot) {
+  module.hot.accept()
+}
+
+runApp()
