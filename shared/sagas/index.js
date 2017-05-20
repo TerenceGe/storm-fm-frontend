@@ -5,7 +5,6 @@ import tracksSaga from './tracks'
 import likesSaga from './likes'
 import commentsSaga from './comments'
 import loggerSaga from './logger'
-import socketSaga from './socket'
 
 export default function* rootSaga() {
   yield [
@@ -14,7 +13,6 @@ export default function* rootSaga() {
     fork(tracksSaga),
     fork(likesSaga),
     fork(commentsSaga),
-    fork(socketSaga),
     fork(loggerSaga)
   ]
 }
