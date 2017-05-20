@@ -209,6 +209,7 @@ const clientConfig = Object.assign({}, baseConfig, {
         collapseWhitespace: true
       },
       template: 'index.html',
+      title: 'Storm FM',
       appMountId: 'app',
       mobile: true
     })

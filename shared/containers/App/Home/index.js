@@ -20,13 +20,12 @@ import style from './style.css'
 )
 
 @asyncConnect([{
-  promise: ({ store }) => {
-    Promise.all([
-      store.dispatch(tracksActions.getTracksRequested({ page: 74, filter: 'popular' })),
-      store.dispatch(tracksActions.getTracksRequested({ page: 76, filter: 'popular' })),
-      store.dispatch(tracksActions.getTracksRequested({ page: 77, filter: 'popular' }))
-    ])
-  }
+  promise: ({ store }) =>
+    store.dispatch(tracksActions.getTracksRequested([
+      { page: 208, filter: 'popular' },
+      { page: 210, filter: 'popular' },
+      { page: 211, filter: 'popular' }
+    ]))
 }])
 
 export default class Home extends Component {

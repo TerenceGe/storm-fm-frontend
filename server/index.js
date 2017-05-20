@@ -83,7 +83,7 @@ app.use((req, res) => {
                 <ReduxAsyncConnect {...renderProps} />
               </Provider>
             )
-            const title = flushTitle()
+            const title = flushTitle() || 'Storm FM'
             const preloadedState = store.getState()
             res.status(200).send(renderFullPage(html, title, preloadedState))
           })
